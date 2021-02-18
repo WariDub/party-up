@@ -9,6 +9,6 @@ bootstrap();
 
 async function bootstrap() {
     const app = await NestFactory.create(AppModule);
-    app.use(helmet);
+    app.use(helmet());
     await app.listen(process.env.PORT || 3000);
 }
