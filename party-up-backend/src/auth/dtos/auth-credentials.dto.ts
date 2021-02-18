@@ -15,17 +15,17 @@ export class AuthCredentialsDto {
     @MaxLength(24)
     @Matches(/[A-Za-z0-9]/)
     @IsLowercase()
-    username: string;
+    readonly username: string;
 
     @IsOptional()
     @IsString()
     @MinLength(5)
     @IsEmail()
-    email: string;
+    readonly email: string;
 
     @IsString()
     @MinLength(8)
     @MaxLength(255)
     @Matches(/((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/)
-    password: string;
+    readonly password: string;
 }

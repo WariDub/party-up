@@ -30,8 +30,8 @@ export class AuthService {
             const uid = user.getId();
             const username = user.username;
             const payload: JwtPayload = { uid, username };
-            const accessToken = await this.jwtService.signAsync(payload);
 
+            const accessToken = await this.jwtService.signAsync(payload);
             return { accessToken };
         } catch (error) {
             throw error;

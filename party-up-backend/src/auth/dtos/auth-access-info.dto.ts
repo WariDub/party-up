@@ -1,3 +1,3 @@
 export interface AuthAccessInfoDto {
-    accessToken: string;
+    readonly accessToken: string;
 }

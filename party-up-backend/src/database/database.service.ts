@@ -25,11 +25,12 @@ export class DatabaseService {
     private async makeDbConnection(): Promise<mongoose.Connection> {
         const USER = process.env.DB_USER;
         const PASS = process.env.DB_PASS;
-        const NAME = process.env.DB_NAME;
         const DOMAIN = process.env.DB_DOMAIN;
-        const address = `mongodb+srv://${USER}:${PASS}@${DOMAIN}/${NAME}?retryWrites=true&w=majority`;
+        const NAME = process.env.DB_NAME;
+        const ADDRESS = `mongodb+srv://${USER}:${PASS}@${DOMAIN}/${NAME}?retryWrites=true&w=majority`;
+
         try {
-            await mongoose.connect(address, mongooseConfig);
+            await mongoose.connect(ADDRESS, mongooseConfig);
             return mongoose.connection;
         } catch (error) {
             this.logger.error(error);

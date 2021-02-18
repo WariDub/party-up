@@ -12,6 +12,33 @@ import * as bcrypt from 'bcryptjs';
 
 @Injectable()
 export class UsersService {
+    async saveNewUser(authCredentialsDto: AuthCredentialsDto): Promise<void> {
+        const { username, email, password } = authCredentialsDto;
+        if (!username || !email) {
+            throw new UnauthorizedException('Missing credentials.');
+        }
+
+        const user = new Users();
+        user.username = username.toLowerCase().trim();
+        user.displayName = username;
+        user.email = email.toLowerCase().trim();
+        user.salt = await bcrypt.genSalt();
+        user.password = await bcrypt.hash(password, user.salt);
+        user.date = Date.now();
+
+        try {
+            await user.save();
+        } catch (error) {
+            if (error.code === 11000) {
+                throw new ConflictException('User already exists.');
+            } else {
+                throw new InternalServerErrorException(
+                    'An error occured while creating your account.',
+                );
+            }
+        }
+    }
+
     async getUserByIdWithSensitiveInfo(id: string): Promise<User> {
         try {
             const user = await Users.findById(id);
@@ -74,34 +101,6 @@ export class UsersService {
             return user;
         } catch (error) {
             throw new NotFoundException('User not found.');
-        }
-    }
-
-    async saveNewUser(authCredentialsDto: AuthCredentialsDto): Promise<void> {
-        const { username, email, password } = authCredentialsDto;
-        if (!username || !email) {
-            throw new UnauthorizedException('Missing credentials.');
-        }
-
-        const user = new Users();
-
-        user.username = username.toLowerCase().trim();
-        user.displayName = username;
-        user.email = email.toLowerCase().trim();
-        user.salt = await bcrypt.genSalt();
-        user.password = await bcrypt.hash(password, user.salt);
-        user.date = Date.now();
-
-        try {
-            await user.save();
-        } catch (error) {
-            if (error.code === 11000) {
-                throw new ConflictException('User already exists.');
-            } else {
-                throw new InternalServerErrorException(
-                    'An error occured while creating your account.',
-                );
-            }
         }
     }
 }
