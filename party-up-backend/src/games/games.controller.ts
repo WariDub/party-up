@@ -2,7 +2,7 @@ import { Controller, Get, Query, UseGuards, ValidationPipe } from '@nestjs/commo
 import { AuthGuard } from '@nestjs/passport';
 import { GetGamesFilterDto } from './dtos/get-games-filter.dto';
 import { GamesService } from './games.service';
-import { Game } from './models/game.model';
+import { Game } from './interfaces/game.interface';
 
 @Controller('games')
 @UseGuards(AuthGuard())

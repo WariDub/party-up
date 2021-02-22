@@ -1,4 +1,4 @@
-export class Game {
+export interface Game {
     id: string;
     cover: { [key: string]: string };
     genres: { [key: string]: string };

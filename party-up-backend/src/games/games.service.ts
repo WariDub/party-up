@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { GetGamesFilterDto } from './dtos/get-games-filter.dto';
-import { Game } from './models/game.model';
+import { Game } from './interfaces/game.interface';
 import * as axios from 'axios';
 
 @Injectable()

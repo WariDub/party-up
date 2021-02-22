@@ -49,7 +49,7 @@ export class User {
     @prop({
         required: true,
     })
-    date: number;
+    createdAt: number;
 
     async verifyPassword(password: string): Promise<boolean> {
         const hash = await bcrypt.hash(password, this.salt);
