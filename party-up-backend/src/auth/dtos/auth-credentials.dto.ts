@@ -3,6 +3,7 @@ import {
     IsLowercase,
     IsOptional,
     IsString,
+    Length,
     Matches,
     MaxLength,
     MinLength,
@@ -11,8 +12,7 @@ import {
 export class AuthCredentialsDto {
     @IsOptional()
     @IsString()
-    @MinLength(4)
-    @MaxLength(24)
+    @Length(4, 24)
     @Matches(/[A-Za-z0-9]/)
     @IsLowercase()
     readonly username: string;

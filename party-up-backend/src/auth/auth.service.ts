@@ -10,8 +10,8 @@ import { JwtPayload } from './jwt/jwt-payload.interface';
 export class AuthService {
     constructor(
         @Inject(forwardRef(() => UsersService))
-        private usersService: UsersService,
-        private jwtService: JwtService,
+        private readonly usersService: UsersService,
+        private readonly jwtService: JwtService,
     ) {}
 
     async register(authCredentialsDto: AuthCredentialsDto): Promise<AuthAccessInfoDto> {

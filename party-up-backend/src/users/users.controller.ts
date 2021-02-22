@@ -8,7 +8,7 @@ import { UsersService } from './users.service';
 @Controller('users')
 @UseGuards(AuthGuard())
 export class UsersController {
-    constructor(private usersService: UsersService) {}
+    constructor(private readonly usersService: UsersService) {}
 
     @Get('/:username')
     async getUserByUsername(@Param('username') username: string): Promise<User> {
