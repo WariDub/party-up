@@ -1,0 +1,31 @@
+Yoan Dubuc:
+  What did you accomplish yesterday?
+      Finished sprint 1 and discussed progress with group members in meeting, delegated tasks in Jira.
+  What do you plan on doing today?
+      Configure the backend structure in the git repository so we can get it connected to a database and start creating user accounts.
+  Do you have any obstacles?
+      One obstacle that will need to be addressed is deciding the best way to host the frontend and backend so that it is publicly accessible.
+      
+Michael Vanderbilt:
+  What did you accomplish yesterday?  
+      Researched React and purchased a website
+  What do you plan on doing today?
+      Installed a virtual ubuntu machine onto my laptop to simulate the ubuntu virtual private server that I purchased.
+  Do you have any obstacles? 
+      I am attempting to download party-up from git and run in the virtual machine on my laptop and i am running into difficulties. npm cannot locate the scripts in the package.json file. Will attempt to create a test app and see what happens
+      
+Ward Williams:
+  What did you accomplish yesterday?
+      I researched cookies in REACT.
+  What do you plan on doing today?
+      Today I plan to fix some things in Jira to better adapt to our workflow.
+  Do you have any obstacles?
+      No, not at this time.
+      
+Justin Ross:
+  What did you accomplish yesterday?
+      I researched how to create the front end of a project using REACT.
+  What do you plan on doing today?
+      To research further, and learn, how to create a search bar in REACT for the project.
+  Do you have any obstacles?
+      My power has been going out due to weather, and I am not expereince in REACT so there is a bit of a learning curve there.
