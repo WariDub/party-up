@@ -90,3 +90,9 @@ p, div {
     display: flex;
     flex-wrap: wrap;
   }
+
+  .error{
+    color: red;
+    font-size: 10px;
+    align-content: center;
+  }
