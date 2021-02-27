@@ -1,9 +1,18 @@
 import React from 'react';
-import './App.css';
+import { ClassificationType } from 'typescript';
+
+import classes from './App.module.css';
 import  SignUp  from './Auth/SignUpForm';
+import SearchPage from './SearchPage/SearchPage';
+
+
+
+
 function App() {
    return (
-    <SignUp/>
-   );
+      <SearchPage/>
+      //<SignUp/>
+   )
 }
+
 export default App;
