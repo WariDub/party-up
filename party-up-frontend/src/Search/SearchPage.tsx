@@ -3,37 +3,37 @@ import GamesList from './components/GamesList';
 import NavBar from './components/NavBar';
 import { Game } from './interfaces/Game';
 
-export interface SearchPageProps {
-    
-}
- 
+export interface SearchPageProps {}
+
 export interface SearchPageState {
-    results: Game[]
+  results: Game[];
 }
 
-class SearchPage extends React.Component<SearchPageProps, SearchPageState> {
-    constructor(props: SearchPageProps) {
-        super(props);
+const SearchPage = class extends React.PureComponent<SearchPageProps, SearchPageState> {
+  constructor(props: SearchPageProps) {
+    super(props);
 
-        this.state = {
-            results: []
-        }
+    this.state = {
+      results: [],
+    };
 
-        this.onQueryResult = this.onQueryResult.bind(this)
-    }
+    this.onQueryResult = this.onQueryResult.bind(this);
+  }
 
-    render() {
-        return (
-            <React.Fragment>
-                <NavBar onUpdate={this.onQueryResult}/>
-                <GamesList results={this.state.results}/>
-            </React.Fragment>
-        );
-    }
+  render(): JSX.Element {
+    const { results } = this.state;
 
-    onQueryResult(data: Game[]) {
-        this.setState({ results: data })
-    }
-}
+    return (
+      <>
+        <NavBar onQueryResult={this.onQueryResult} />
+        <GamesList results={results} />
+      </>
+    );
+  }
 
-export default SearchPage
+  onQueryResult(data: Game[]): void {
+    this.setState({ results: data });
+  }
+};
+
+export default SearchPage;
