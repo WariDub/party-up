@@ -32,7 +32,7 @@ class NavBar extends React.Component<NavBarProps, NavBarState> {
                     <Typography variant="h6">
                         PartyUp
                     </Typography>
-                    <Box m={1}>
+                    <Box m={1} mx="auto">
                         <TextField
                             variant="filled"
                             label="Enter game name"

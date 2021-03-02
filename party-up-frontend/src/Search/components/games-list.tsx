@@ -1,3 +1,4 @@
+import { Box, GridList, GridListTile, GridListTileBar } from '@material-ui/core';
 import React from 'react';
 import { Game } from '../interfaces/Game';
 
@@ -12,11 +13,16 @@ export interface GamesListState {
 class GamesList extends React.Component<GamesListProps, GamesListState> {
     render() { 
         return (
-            <div>
-                {this.props.results.map((result, index) => (
-                    <p key={index}>{result.name}</p>
-                ))}
-            </div>
+            <Box p={1} mx="auto">
+                <GridList spacing={8} cols={3}>
+                    {this.props.results.map((result) => (
+                        <GridListTile key={result.id} cols={1}>
+                        <img src={result.cover['url'].replace('t_thumb', 't_720p')} alt={result.name} />
+                        <GridListTileBar title={result.name}/>
+                        </GridListTile>
+                    ))}
+                </GridList>
+            </Box>
         );
     }
 }
