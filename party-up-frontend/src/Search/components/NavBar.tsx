@@ -50,7 +50,7 @@ class NavBar extends React.Component<NavBarProps, NavBarState> {
     }
 
     onKeyPress(event: any){
-      if(event.keyCode == 13){
+      if(event.keyCode === 13){
          this.didSubmitQuery()
       }
    }

@@ -1,6 +1,6 @@
 import React from 'react';
-import GamesList from './components/games-list';
-import NavBar from './components/nav-bar';
+import GamesList from './components/GamesList';
+import NavBar from './components/NavBar';
 import { Game } from './interfaces/Game';
 
 export interface SearchPageProps {
