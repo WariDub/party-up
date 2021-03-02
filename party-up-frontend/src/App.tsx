@@ -3,7 +3,7 @@ import { ClassificationType } from 'typescript';
 
 import classes from './App.module.css';
 import  SignUp  from './Auth/SignUpForm';
-import SearchPage from './SearchPage/SearchPage';
+import SearchPage from './Search/SearchPage';
 
 
 

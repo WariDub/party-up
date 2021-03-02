@@ -5,6 +5,23 @@ import * as axios from 'axios';
 
 @Injectable()
 export class GamesService {
+    private matchmakings = {};
+
+    /*
+    {
+        "id-of-game": {
+            users[]
+        },
+        "id-of-game": {
+            users[]
+        }
+    }
+    */
+
+    /*
+    const users = matchmakings["id-of-game"]
+    */
+
     async getGames(getGamesFilterDto: GetGamesFilterDto): Promise<Game[]> {
         const { search } = getGamesFilterDto;
         const reqUrl = `https://api.igdb.com/v4/games?search=${search}&fields=name,rating,genres.*,cover.*`;
@@ -17,8 +34,7 @@ export class GamesService {
 
         try {
             const res = await axios.default.get(reqUrl, config);
-            const games: Game[] = JSON.parse(JSON.stringify(res.data));
-            return games;
+            return res.data;
         } catch (e) {
             console.log(e);
             return null;
