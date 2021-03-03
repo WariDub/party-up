@@ -1,18 +1,13 @@
 import React from 'react';
-import { ClassificationType } from 'typescript';
 
-import classes from './App.module.css';
-import  SignUp  from './Auth/SignUpForm';
+import SignUp from './Auth/SignUpForm';
 import SearchPage from './Search/SearchPage';
 
-
-
-
-function App() {
-   return (
-      <SearchPage/>
-      //<SignUp/>
-   )
+function App(): JSX.Element {
+  return (
+    <SearchPage />
+    // <SignUp/>
+  );
 }
 
 export default App;

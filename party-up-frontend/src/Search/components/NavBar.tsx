@@ -19,8 +19,8 @@ const NavBar = class extends React.PureComponent<NavBarProps, NavBarState> {
       query: '',
     };
 
-    this.onKeyPress = this.onKeyPress.bind(this);
     this.handleTextFieldOnChange = this.handleTextFieldOnChange.bind(this);
+    this.onKeyPress = this.onKeyPress.bind(this);
     this.didSubmitQuery = this.didSubmitQuery.bind(this);
   }
 
