@@ -20,7 +20,7 @@ const NavBar = class extends React.PureComponent<NavBarProps, NavBarState> {
     };
 
     this.handleTextFieldOnChange = this.handleTextFieldOnChange.bind(this);
-    this.onKeyPress = this.onKeyPress.bind(this);
+    this.handleTextFieldOnKeyDown = this.handleTextFieldOnKeyDown.bind(this);
     this.didSubmitQuery = this.didSubmitQuery.bind(this);
   }
 
@@ -34,7 +34,7 @@ const NavBar = class extends React.PureComponent<NavBarProps, NavBarState> {
               variant="filled"
               label="Enter game name"
               onChange={this.handleTextFieldOnChange}
-              onKeyDown={this.onKeyPress}
+              onKeyDown={this.handleTextFieldOnKeyDown}
             />
           </Box>
         </Toolbar>
@@ -46,7 +46,7 @@ const NavBar = class extends React.PureComponent<NavBarProps, NavBarState> {
     this.setState({ query: field.target.value });
   }
 
-  onKeyPress(event: any): void {
+  handleTextFieldOnKeyDown(event: any): void {
     if (event.keyCode === 13) {
       this.didSubmitQuery();
     }
@@ -54,9 +54,9 @@ const NavBar = class extends React.PureComponent<NavBarProps, NavBarState> {
 
   async didSubmitQuery(): Promise<void> {
     const { query } = this.state;
-
     const reqUrl = `http://localhost:3001/games?search=${query}`;
-    const config = {
+    // TODO: replace this hard coded access token with the one stored in cookies
+    const config: axios.AxiosRequestConfig = {
       headers: {
         Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MDNkNzIzNzNlMDkwZTE3NTQwYmI5NzkiLCJ1c2VybmFtZSI6InlkdWJ1YyIsImlhdCI6MTYxNDY1MzY5NywiZXhwIjoxNjE1MjU4NDk3fQ.m0yN4z6dUs9BuyUMi7vMM3Suq2ECAJh_Q2tQi44dv9U`,
       },
