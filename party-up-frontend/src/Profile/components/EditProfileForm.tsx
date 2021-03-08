@@ -13,6 +13,7 @@ import {
   Typography,
 } from '@material-ui/core';
 import React from 'react';
+import Gender from '../enums/gender.enum';
 import Genre from '../enums/genre.enum';
 import Role from '../enums/role.enum';
 
@@ -20,6 +21,7 @@ export interface EditProfileFormProps {}
 
 export interface EditProfileFormState {
   age: number;
+  gender: Gender;
   favoriteGenre: Genre;
   favoriteRole: Role;
 }
@@ -30,7 +32,8 @@ const EditProfileForm = class extends React.Component<EditProfileFormProps, Edit
 
     this.state = {
       age: 0,
-      favoriteGenre: Genre.Action,
+      gender: Gender.OTHER,
+      favoriteGenre: Genre.ACTION,
       favoriteRole: Role.DPS,
     };
   }
@@ -56,6 +59,7 @@ const EditProfileForm = class extends React.Component<EditProfileFormProps, Edit
               <Typography variant="h6">Profile</Typography>
             </Grid>
             {this.renderQuestionAge()}
+            {this.renderQuestionGender()}
             {this.renderQuestionFavoriteGenre()}
             {this.renderQuestionFavoriteRole()}
           </Grid>
@@ -90,15 +94,22 @@ const EditProfileForm = class extends React.Component<EditProfileFormProps, Edit
     }
   };
 
-  renderQuestionFavoriteGenre(): JSX.Element {
-    const { favoriteGenre } = this.state;
+  // eslint-disable-next-line class-methods-use-this
+  renderFieldWithChoices(
+    label: string,
+    value: string | number,
+    choices: { [key: string]: string | number },
+    onChange: (event: React.ChangeEvent<{ value: unknown }>) => void
+  ): JSX.Element {
     return (
       <Grid item xs={10}>
         <FormControl fullWidth variant="filled">
-          <InputLabel>Favorite Genre</InputLabel>
-          <Select value={favoriteGenre} onChange={this.handleChangeFavoriteGenre}>
-            {Object.values(Genre).map((genre) => (
-              <MenuItem value={genre}>{genre}</MenuItem>
+          <InputLabel>{label}</InputLabel>
+          <Select value={value} onChange={onChange}>
+            {Object.values(choices).map((choice) => (
+              <MenuItem key={choice} value={choice}>
+                {choice}
+              </MenuItem>
             ))}
           </Select>
         </FormControl>
@@ -106,33 +117,50 @@ const EditProfileForm = class extends React.Component<EditProfileFormProps, Edit
     );
   }
 
-  handleChangeFavoriteGenre = (event: React.ChangeEvent<{ value: unknown }>): void => {
-    this.setState({ favoriteGenre: event.target.value as Genre });
-  };
+  renderQuestionGender(): JSX.Element {
+    const { gender } = this.state;
+    return this.renderFieldWithChoices('Gender', gender, Gender, this.handleChangeGender);
+  }
+
+  renderQuestionFavoriteGenre(): JSX.Element {
+    const { favoriteGenre } = this.state;
+    return this.renderFieldWithChoices(
+      'Favorite Genre',
+      favoriteGenre,
+      Genre,
+      this.handleChangeFavoriteGenre
+    );
+  }
 
   renderQuestionFavoriteRole(): JSX.Element {
     const { favoriteRole } = this.state;
-    return (
-      <Grid item xs={10}>
-        <FormControl fullWidth variant="filled">
-          <InputLabel>Favorite Role</InputLabel>
-          <Select value={favoriteRole} onChange={this.handleChangeFavoriteRole}>
-            {Object.values(Role).map((role) => (
-              <MenuItem value={role}>{role}</MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-      </Grid>
+    return this.renderFieldWithChoices(
+      'Favorite Role',
+      favoriteRole,
+      Role,
+      this.handleChangeFavoriteRole
     );
   }
 
-  handleChangeFavoriteRole = (event: React.ChangeEvent<{ value: unknown }>): void => {
-    this.setState({ favoriteRole: event.target.value as Role });
+  handleChangeGender = (event: React.ChangeEvent<{ value: unknown }>): void => {
+    const value = event.target.value as Gender;
+    this.setState({ gender: value });
   };
 
-  handleButtonOnClickSaveChanges = () => {
-    const { age, favoriteGenre, favoriteRole } = this.state;
-    console.log(age, favoriteGenre, favoriteRole);
+  handleChangeFavoriteGenre = (event: React.ChangeEvent<{ value: unknown }>): void => {
+    const value = event.target.value as Genre;
+    this.setState({ favoriteGenre: value });
+  };
+
+  handleChangeFavoriteRole = (event: React.ChangeEvent<{ value: unknown }>): void => {
+    const value = event.target.value as Role;
+    this.setState({ favoriteRole: value });
+  };
+
+  handleButtonOnClickSaveChanges = async (): Promise<void> => {
+    const { age, gender, favoriteGenre, favoriteRole } = this.state;
+    console.log(age, gender, favoriteGenre, favoriteRole);
+    // TODO: connect to backend to save user profile
   };
 };
 

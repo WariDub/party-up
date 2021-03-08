@@ -1,7 +1,7 @@
 enum Genre {
-  Action = 'Action',
-  Adventure = 'Adventure',
-  Platformer = 'Platformer',
+  ACTION = 'Action',
+  ADVENTURE = 'Adventure',
+  PLATFORMER = 'Platformer',
 }
 
 export default Genre;
