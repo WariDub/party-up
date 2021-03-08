@@ -9,6 +9,7 @@ import { AuthCredentialsDto } from '../auth/dtos/auth-credentials.dto';
 import { EditUserDto } from './dtos/edit-user.dto';
 import { User, Users } from './models/user.model';
 import * as bcrypt from 'bcryptjs';
+import { GetUsersFilterDto } from './dtos/get-users-filter.dto';
 
 @Injectable()
 export class UsersService {
@@ -36,6 +37,38 @@ export class UsersService {
                     'An error occured while creating your account.',
                 );
             }
+        }
+    }
+
+    async getUsers(getUsersFilterDto: GetUsersFilterDto): Promise<User[]> {
+        try {
+            const users = await this.getUsersWithSensitiveInfo(getUsersFilterDto);
+            users.forEach((user) => user.hideSensitiveInfo());
+            return users;
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    async getUsersWithSensitiveInfo(getUsersFilterDto: GetUsersFilterDto): Promise<User[]> {
+        const { id, name } = getUsersFilterDto;
+        const query = {};
+
+        if (id) {
+            query['_id'] = id;
+        }
+        if (name) {
+            query['displayName'] = { $regex: `.*${[name]}.*` };
+        }
+        if (!Object.keys(query).length) {
+            throw new NotFoundException('Query parameters too broad.');
+        }
+
+        try {
+            const users = await Users.find(query).limit(10);
+            return users;
+        } catch (error) {
+            throw new NotFoundException();
         }
     }
 
