@@ -1,9 +1,13 @@
 import React from 'react';
-import './App.css';
-import  SignUp  from './Auth/SignUpForm';
-function App() {
-   return (
-    <SignUp/>
-   );
+
+import SignUp from './Auth/SignUpForm';
+import SearchPage from './Search/SearchPage';
+
+function App(): JSX.Element {
+  return (
+    <SearchPage />
+    // <SignUp/>
+  );
 }
+
 export default App;

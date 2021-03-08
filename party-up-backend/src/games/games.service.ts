@@ -17,8 +17,7 @@ export class GamesService {
 
         try {
             const res = await axios.default.get(reqUrl, config);
-            const games: Game[] = JSON.parse(JSON.stringify(res.data));
-            return games;
+            return res.data;
         } catch (e) {
             console.log(e);
             return null;
