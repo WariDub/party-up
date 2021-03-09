@@ -9,12 +9,6 @@ export interface GamesListProps {
 export interface GamesListState {}
 
 const GamesList = class extends React.PureComponent<GamesListProps, GamesListState> {
-  constructor(props: GamesListProps) {
-    super(props);
-
-    this.handleGameOnClick = this.handleGameOnClick.bind(this);
-  }
-
   render(): JSX.Element {
     const { results } = this.props;
 
@@ -32,8 +26,7 @@ const GamesList = class extends React.PureComponent<GamesListProps, GamesListSta
     );
   }
 
-  // eslint-disable-next-line class-methods-use-this
-  getGameCoverUrl(result: Game): string {
+  getGameCoverUrl = (result: Game): string => {
     const { cover } = result;
     if (!cover) {
       return '';
@@ -43,9 +36,9 @@ const GamesList = class extends React.PureComponent<GamesListProps, GamesListSta
       return '';
     }
     return url.replace('t_thumb', 't_cover_big');
-  }
+  };
 
-  handleGameOnClick(event: any): void {
+  handleGameOnClick = (event: any): void => {
     const { id } = event.target;
     const { results } = this.props;
     const game = results.find((g) => g.id.toString() === id);
@@ -54,7 +47,7 @@ const GamesList = class extends React.PureComponent<GamesListProps, GamesListSta
       console.log(game);
       // TODO: navigate to select skill level page
     }
-  }
+  };
 };
 
 export default GamesList;

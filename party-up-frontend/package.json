@@ -44,8 +44,6 @@
     ]
   },
   "devDependencies": {
-    "eslint": "^7.21.0",
-    "eslint-config-airbnb-typescript-prettier": "^4.1.0",
-    "prettier": "^2.2.1"
+    "eslint": "^7.21.0"
   }
 }

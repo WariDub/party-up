@@ -16,8 +16,6 @@ const SearchPage = class extends React.PureComponent<SearchPageProps, SearchPage
     this.state = {
       results: [],
     };
-
-    this.onQueryResult = this.onQueryResult.bind(this);
   }
 
   render(): JSX.Element {
@@ -31,9 +29,9 @@ const SearchPage = class extends React.PureComponent<SearchPageProps, SearchPage
     );
   }
 
-  onQueryResult(data: Game[]): void {
+  onQueryResult = (data: Game[]): void => {
     this.setState({ results: data });
-  }
+  };
 };
 
 export default SearchPage;
