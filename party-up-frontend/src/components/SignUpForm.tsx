@@ -1,33 +1,73 @@
 import React from "react";
 import './style.css';
 export class SignUp extends React.Component{
+
+
+
  
+ onSignIn = (event : any) => {}  
+ onSignUp = (event : any) => {}  
  handleChange = (event : any) => {}  
  handleSubmit = (event : any) => {}
  render() {
      return (
-       <div className='wrapper'>
-         <div className='form-wrapper'>
-            <h2>Sign Up</h2>
-            <form onSubmit={this.handleSubmit} noValidate >
-               <div className='Name'>
-                  <label htmlFor="Name">Name</label>
-                  <input type='text' name='Name' onChange=            {this.handleChange}/>
-               </div>
-               <div className='email'>
-                  <label htmlFor="email">Email</label>
-                  <input type='email' name='email' onChange={this.handleChange}/>
-               </div>
-               <div className='password'>
-                  <label htmlFor="password">Password</label>
-                  <input type='password' name='password' onChange={this.handleChange}/>
-               </div>              
-               <div className='submit'>
-                  <button>Register Me</button>
-               </div>
-          </form>
-      </div>
-   </div>
+	<div className='wrapper'>
+       <div className="login-wrap">
+	<div className="login-html">
+		<input id="tab-1" type="radio" name="tab" className="sign-in" checked/><label htmlFor="tab-1" className="tab">Sign In</label>
+		<input id="tab-2" type="radio" name="tab" className="sign-up"/><label htmlFor="tab-2" className="tab">Sign Up</label>
+		<div className="login-form">
+			<div className="sign-in-htm">
+				<div className="group">
+					<label htmlFor="user" className="label">Username</label>
+					<input id="user" type="text" className="input"/>
+				</div>
+				<div className="group">
+					<label htmlFor="pass" className="label">Password</label>
+					<input id="pass" type="password" className="input" data-type="password"/>
+				</div>
+				<div className="group">
+					<input id="check" type="checkbox" className="check" checked/>
+					<label htmlFor="check"><span className="icon"></span> Keep me Signed in</label>
+				</div>
+				<div className="group">
+				<button type="submit" className="button" value="Sign In" onClick={this.onSignIn}>Sign Up</button>
+				 </div>
+				<div className="hr"></div>
+				<div className="foot-lnk">
+					<a href="#forgot">Forgot Password?</a>
+				</div>
+			</div>
+			<div className="sign-up-htm">
+				<div className="group">
+					<label htmlFor="user" className="label">Username</label>
+					<input id="user" type="text" className="input"/>
+				</div>
+				<div className="group">
+					<label htmlFor="pass" className="label">Password</label>
+					<input id="pass" type="password" className="input" data-type="password"/>
+				</div>
+				<div className="group">
+					<label htmlFor="pass" className="label">Repeat Password</label>
+					<input id="pass" type="password" className="input" data-type="password"/>
+				</div>
+				<div className="group">
+					<label htmlFor="pass" className="label">Email Address</label>
+					<input id="pass" type="text" className="input"/>
+				</div>
+				<div className="group">
+					<button type="submit" className="button" value="Sign Up" onClick={this.onSignUp}>Sign In</button>
+				</div>
+				<div className="hr"></div>
+				<div className="foot-lnk">
+					<label htmlFor="tab-1">Already Member?</label>
+				</div>
+			</div>
+		</div>
+	</div>
+  </div>
+</div>
+
   );
  }
 }
