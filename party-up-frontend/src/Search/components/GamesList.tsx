@@ -12,18 +12,18 @@ const GamesList = class extends React.PureComponent<GamesListProps, GamesListSta
   constructor(props: GamesListProps) {
     super(props);
 
-    this.getGameCoverUrl = this.getGameCoverUrl.bind(this);
+    this.handleGameOnClick = this.handleGameOnClick.bind(this);
   }
 
   render(): JSX.Element {
     const { results } = this.props;
 
     return (
-      <Box p={1} width="80%">
+      <Box p={1}>
         <GridList spacing={8} cellHeight="auto" cols={0}>
           {results.map((result) => (
-            <GridListTile key={result.id}>
-              <img src={this.getGameCoverUrl(result)} alt={result.name} />
+            <GridListTile key={result.id} onClick={this.handleGameOnClick}>
+              <img src={this.getGameCoverUrl(result)} alt={result.name} id={result.id} />
               <GridListTileBar title={result.name} />
             </GridListTile>
           ))}
@@ -43,6 +43,17 @@ const GamesList = class extends React.PureComponent<GamesListProps, GamesListSta
       return '';
     }
     return url.replace('t_thumb', 't_cover_big');
+  }
+
+  handleGameOnClick(event: any): void {
+    const { id } = event.target;
+    const { results } = this.props;
+    const game = results.find((g) => g.id.toString() === id);
+
+    if (game) {
+      console.log(game);
+      // TODO: navigate to select skill level page
+    }
   }
 };
 
