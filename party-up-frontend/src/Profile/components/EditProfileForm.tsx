@@ -163,7 +163,7 @@ const EditProfileForm = class extends React.Component<EditProfileFormProps, Edit
   handleButtonOnClickSaveChanges = async (): Promise<void> => {
     const { age, gender, favoriteGenre, favoriteRole } = this.state;
     if (typeof age !== 'number') {
-      console.error('age should be a number');
+      return console.error('age should be a number');
     }
     const data: EditUserDto = {
       age,
