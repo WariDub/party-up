@@ -10,9 +10,13 @@ import {
   Radio,
   RadioGroup,
 } from '@material-ui/core';
+import * as axios from 'axios';
 import React from 'react';
+import { BACKEND_URL } from '../../globals';
 import { Game } from '../../Search/interfaces/Game';
+import CreateMatchmakingEntryDto from '../dtos/create-matchmaking-entry.dto';
 import Experience from '../enums/experience.enum';
+import Match from '../models/match.model';
 
 export interface ExperienceLevelPickerFormProps {
   game: Game;
@@ -99,10 +103,32 @@ const ExperienceLevelPickerForm = class extends React.Component<
 
   handleButtonOnClickMatchmake = async (): Promise<void> => {
     const { game } = this.props;
+    if (!game) {
+      return console.error('must provide a game when creating component');
+    }
     const { experience } = this.state;
-    console.log(`experience level: ${experience} for game ${game}`);
-    // TODO: make matchmaking request when backend is ready
-    // TODO: then navigate to user matches page
+    const data: CreateMatchmakingEntryDto = {
+      game,
+      experience,
+    };
+    // TODO: get the access token from localStorage
+    const accessToken =
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MDNkNzIzNzNlMDkwZTE3NTQwYmI5NzkiLCJ1c2VybmFtZSI6InlkdWJ1YyIsImlhdCI6MTYxNDY1MzY5NywiZXhwIjoxNjE1MjU4NDk3fQ.m0yN4z6dUs9BuyUMi7vMM3Suq2ECAJh_Q2tQi44dv9U';
+    const reqUrl = `${BACKEND_URL}/matchmaking`;
+    const config: axios.AxiosRequestConfig = {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    };
+
+    try {
+      const matches: Match[] = await axios.default.post(reqUrl, data, config);
+      console.log(matches);
+      // TODO: make matchmaking request when backend is ready
+      // TODO: then navigate to user matches page
+    } catch (e) {
+      console.error(e);
+    }
   };
 };
 
