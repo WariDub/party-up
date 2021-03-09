@@ -1,6 +1,9 @@
 import { UnauthorizedException } from '@nestjs/common';
 import { getModelForClass, prop } from '@typegoose/typegoose';
 import * as bcrypt from 'bcryptjs';
+import { Gender } from '../enums/gender.enum';
+import { Genre } from '../enums/genre.enum';
+import { Role } from '../enums/role.enum';
 
 export class User {
     getId(): string {
@@ -45,6 +48,29 @@ export class User {
         required: false,
     })
     avatarUrl: string;
+
+    @prop({
+        required: false,
+    })
+    age?: number;
+
+    @prop({
+        required: false,
+        enum: Gender,
+    })
+    gender?: Gender;
+
+    @prop({
+        required: false,
+        enum: Genre,
+    })
+    favoriteGenre?: Genre;
+
+    @prop({
+        required: false,
+        enum: Role,
+    })
+    favoriteRole?: Role;
 
     @prop({
         required: true,

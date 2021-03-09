@@ -12,7 +12,11 @@ import {
   TextField,
   Typography,
 } from '@material-ui/core';
+import * as axios from 'axios';
+import * as jwtDecode from 'jwt-decode';
 import React from 'react';
+import { JwtPayload } from '../../Auth/interfaces/jwt-payload.interface';
+import { EditUserDto } from '../dtos/edit-user.dto';
 import Gender from '../enums/gender.enum';
 import Genre from '../enums/genre.enum';
 import Role from '../enums/role.enum';
@@ -88,10 +92,8 @@ const EditProfileForm = class extends React.Component<EditProfileFormProps, Edit
   }
 
   handleChangeAge = (event: React.ChangeEvent<{ value: unknown }>): void => {
-    const value = event.target.value as number;
-    if (value > 0) {
-      this.setState({ age: value });
-    }
+    const value = event.target.value as string;
+    this.setState({ age: parseInt(value, 10) });
   };
 
   // eslint-disable-next-line class-methods-use-this
@@ -159,8 +161,32 @@ const EditProfileForm = class extends React.Component<EditProfileFormProps, Edit
 
   handleButtonOnClickSaveChanges = async (): Promise<void> => {
     const { age, gender, favoriteGenre, favoriteRole } = this.state;
-    console.log(age, gender, favoriteGenre, favoriteRole);
-    // TODO: connect to backend to save user profile
+    if (typeof age !== 'number') {
+      console.error('age should be a number');
+    }
+    const data: EditUserDto = {
+      age,
+      gender,
+      favoriteGenre,
+      favoriteRole,
+    };
+    // TODO: get the access token from localStorage
+    const accessToken =
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MDNkNzIzNzNlMDkwZTE3NTQwYmI5NzkiLCJ1c2VybmFtZSI6InlkdWJ1YyIsImlhdCI6MTYxNDY1MzY5NywiZXhwIjoxNjE1MjU4NDk3fQ.m0yN4z6dUs9BuyUMi7vMM3Suq2ECAJh_Q2tQi44dv9U';
+    const payload: JwtPayload = jwtDecode.default(accessToken);
+    const reqUrl = `http://localhost:3001/users/${payload.username}`;
+    const config: axios.AxiosRequestConfig = {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    };
+
+    try {
+      const user = await axios.default.patch(reqUrl, data, config);
+      console.log(user);
+    } catch (e) {
+      console.error(e);
+    }
   };
 };
 
