@@ -4,7 +4,8 @@ import SearchPage from './Search/SearchPage';
 
 function App(): JSX.Element {
   return (
-    <SearchPage />
+    <ProfilePage />
+    // <SearchPage />
     // <SignUp/>
   );
 }
