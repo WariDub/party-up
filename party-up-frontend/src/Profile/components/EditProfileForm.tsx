@@ -16,6 +16,7 @@ import * as axios from 'axios';
 import * as jwtDecode from 'jwt-decode';
 import React from 'react';
 import { JwtPayload } from '../../Auth/interfaces/jwt-payload.interface';
+import { BACKEND_URL } from '../../globals';
 import { EditUserDto } from '../dtos/edit-user.dto';
 import Gender from '../enums/gender.enum';
 import Genre from '../enums/genre.enum';
@@ -174,7 +175,7 @@ const EditProfileForm = class extends React.Component<EditProfileFormProps, Edit
     const accessToken =
       'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MDNkNzIzNzNlMDkwZTE3NTQwYmI5NzkiLCJ1c2VybmFtZSI6InlkdWJ1YyIsImlhdCI6MTYxNDY1MzY5NywiZXhwIjoxNjE1MjU4NDk3fQ.m0yN4z6dUs9BuyUMi7vMM3Suq2ECAJh_Q2tQi44dv9U';
     const payload: JwtPayload = jwtDecode.default(accessToken);
-    const reqUrl = `http://localhost:3001/users/${payload.username}`;
+    const reqUrl = `${BACKEND_URL}/users/${payload.username}`;
     const config: axios.AxiosRequestConfig = {
       headers: {
         Authorization: `Bearer ${accessToken}`,

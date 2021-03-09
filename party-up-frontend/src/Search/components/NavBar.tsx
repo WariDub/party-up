@@ -2,6 +2,7 @@ import React from 'react';
 import { AppBar, Toolbar, Typography, TextField, Box } from '@material-ui/core';
 import * as axios from 'axios';
 import { Game } from '../interfaces/Game';
+import { BACKEND_URL } from '../../globals';
 
 export interface NavBarProps {
   onQueryResult: (data: Game[]) => void;
@@ -54,7 +55,7 @@ const NavBar = class extends React.PureComponent<NavBarProps, NavBarState> {
 
   async didSubmitQuery(): Promise<void> {
     const { query } = this.state;
-    const reqUrl = `http://localhost:3001/games?search=${query}`;
+    const reqUrl = `${BACKEND_URL}/games?search=${query}`;
     // TODO: replace this hard coded access token with the one stored in cookies
     const config: axios.AxiosRequestConfig = {
       headers: {
