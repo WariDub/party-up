@@ -10,6 +10,7 @@ enum Genre {
   SPORTS = 'Sports',
   RPG = 'RPG',
   MMO = 'MMO',
+  MMORPG = 'MMORPG',
   STRATEGY = 'Strategy',
 }
 
