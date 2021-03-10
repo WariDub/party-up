@@ -82,11 +82,11 @@ export class MatchmakingService {
             entry.createdAt = Date.now();
 
             const gameId = gameIds[this.randomIntFromInterval(0, gameIds.length - 1)];
-            if (!this.matchmakings[gameId]) {
+            const entries = this.matchmakings[gameId];
+            if (!entries) {
                 this.matchmakings[gameId] = [];
-            } else {
-                this.matchmakings[gameId].push(entry);
             }
+            this.matchmakings[gameId].push(entry);
         }
     }
 
