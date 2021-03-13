@@ -58,7 +58,7 @@ const NavBar = class extends React.PureComponent<NavBarProps, NavBarState> {
     // TODO: replace this hard coded access token with the one stored in cookies
     const config: axios.AxiosRequestConfig = {
       headers: {
-        Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MDNkNzIzNzNlMDkwZTE3NTQwYmI5NzkiLCJ1c2VybmFtZSI6InlkdWJ1YyIsImlhdCI6MTYxNDY1MzY5NywiZXhwIjoxNjE1MjU4NDk3fQ.m0yN4z6dUs9BuyUMi7vMM3Suq2ECAJh_Q2tQi44dv9U`,
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
       },
     };
 

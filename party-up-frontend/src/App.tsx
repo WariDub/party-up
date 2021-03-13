@@ -1,12 +1,12 @@
 import React from 'react';
-
-import SignUp from './Auth/SignUpForm';
-import SearchPage from './Search/SearchPage';
+import {BrowserRouter as Router} from "react-router-dom";
+import {Routes} from './Navigation/Routes'
 
 function App(): JSX.Element {
   return (
-    <SearchPage />
-    // <SignUp/>
+    <Router>
+       {Routes}
+    </Router>
   );
 }
 
