@@ -53,10 +53,9 @@ const NavBar = class extends React.PureComponent<NavBarProps, NavBarState> {
   didSubmitQuery = async (): Promise<void> => {
     const { query } = this.state;
     const reqUrl = `http://localhost:3001/games?search=${query}`;
-    // TODO: replace this hard coded access token with the one stored in cookies
     const config: axios.AxiosRequestConfig = {
       headers: {
-        Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MDNkNzIzNzNlMDkwZTE3NTQwYmI5NzkiLCJ1c2VybmFtZSI6InlkdWJ1YyIsImlhdCI6MTYxNTMyMDEyNiwiZXhwIjoxNjE1OTI0OTI2fQ.UHQVJXjJ0IzFhxbmqYeBw50pwx7Fr7HmW1rLfyIO_iQ`,
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
       },
     };
 
