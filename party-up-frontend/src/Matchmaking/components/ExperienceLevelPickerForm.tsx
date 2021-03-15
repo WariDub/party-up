@@ -111,21 +111,18 @@ const ExperienceLevelPickerForm = class extends React.Component<
       game,
       experience,
     };
-    // TODO: get the access token from localStorage
-    const accessToken =
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MDNkNzIzNzNlMDkwZTE3NTQwYmI5NzkiLCJ1c2VybmFtZSI6InlkdWJ1YyIsImlhdCI6MTYxNDY1MzY5NywiZXhwIjoxNjE1MjU4NDk3fQ.m0yN4z6dUs9BuyUMi7vMM3Suq2ECAJh_Q2tQi44dv9U';
+
     const reqUrl = `${BACKEND_URL}/matchmaking`;
     const config: axios.AxiosRequestConfig = {
       headers: {
-        Authorization: `Bearer ${accessToken}`,
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
       },
     };
 
     try {
       const matches: Match[] = await axios.default.post(reqUrl, data, config);
       console.log(matches);
-      // TODO: make matchmaking request when backend is ready
-      // TODO: then navigate to user matches page
+      // TODO: navigate to user matches page
     } catch (e) {
       console.error(e);
     }
