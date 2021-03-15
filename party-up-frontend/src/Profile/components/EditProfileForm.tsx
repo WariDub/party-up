@@ -165,15 +165,18 @@ const EditProfileForm = class extends React.Component<EditProfileFormProps, Edit
     if (typeof age !== 'number') {
       return console.error('age should be a number');
     }
+
     const data: EditUserDto = {
       age,
       gender,
       favoriteGenre,
       favoriteRole,
     };
-    // TODO: get the access token from localStorage
-    const accessToken =
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MDNkNzIzNzNlMDkwZTE3NTQwYmI5NzkiLCJ1c2VybmFtZSI6InlkdWJ1YyIsImlhdCI6MTYxNDY1MzY5NywiZXhwIjoxNjE1MjU4NDk3fQ.m0yN4z6dUs9BuyUMi7vMM3Suq2ECAJh_Q2tQi44dv9U';
+    const accessToken = localStorage.getItem('token');
+    if (!accessToken) {
+      return console.error('missing access token');
+    }
+
     const payload: JwtPayload = jwtDecode.default(accessToken);
     const reqUrl = `${BACKEND_URL}/users/${payload.username}`;
     const config: axios.AxiosRequestConfig = {
