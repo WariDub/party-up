@@ -1,14 +1,29 @@
-import { Body, Controller, Get, Param, Patch, UseGuards, ValidationPipe } from '@nestjs/common';
+import {
+    Body,
+    Controller,
+    Get,
+    Param,
+    Patch,
+    Query,
+    UseGuards,
+    ValidationPipe,
+} from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { EditUserDto } from './dtos/edit-user.dto';
 import { GetUser } from './decorators/get-user.decorator';
 import { User } from './models/user.model';
 import { UsersService } from './users.service';
+import { GetUsersFilterDto } from './dtos/get-users-filter.dto';
 
 @Controller('users')
 @UseGuards(AuthGuard())
 export class UsersController {
     constructor(private readonly usersService: UsersService) {}
+
+    @Get('/users')
+    async getUsers(@Query(ValidationPipe) getUsersFilterDto: GetUsersFilterDto): Promise<User[]> {
+        return this.usersService.getUsers(getUsersFilterDto);
+    }
 
     @Get('/:username')
     async getUserByUsername(@Param('username') username: string): Promise<User> {
