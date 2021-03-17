@@ -20,17 +20,13 @@ const SearchPage = class extends React.PureComponent<SearchPageProps, SearchPage
   }
 
   render(): JSX.Element {
+    const { history, location, match } = this.props;
     const { results } = this.state;
 
     return (
       <>
         <NavBar onQueryResult={this.onQueryResult} />
-        <GamesList
-          results={results}
-          history={this.props.history}
-          location={this.props.location}
-          match={this.props.match}
-        />
+        <GamesList history={history} location={location} match={match} results={results} />
       </>
     );
   }
