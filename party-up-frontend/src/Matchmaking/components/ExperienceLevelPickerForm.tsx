@@ -12,17 +12,17 @@ import {
 } from '@material-ui/core';
 import * as axios from 'axios';
 import React from 'react';
+import { RouteComponentProps } from 'react-router-dom';
 import { BACKEND_URL } from '../../globals';
 import { Game } from '../../Search/interfaces/Game';
 import CreateMatchmakingEntryDto from '../dtos/create-matchmaking-entry.dto';
 import Experience from '../enums/experience.enum';
 import Match from '../models/match.model';
 
-export interface ExperienceLevelPickerFormProps {
-  game: Game;
-}
+export interface ExperienceLevelPickerFormProps extends RouteComponentProps {}
 
 export interface ExperienceLevelPickerFormState {
+  game?: Game;
   experience: Experience;
 }
 
@@ -33,7 +33,9 @@ const ExperienceLevelPickerForm = class extends React.Component<
   constructor(props: ExperienceLevelPickerFormProps) {
     super(props);
 
+    const { game } = props.location.state as ExperienceLevelPickerFormState;
     this.state = {
+      game: game,
       experience: Experience.BEGINNER,
     };
   }
@@ -102,7 +104,7 @@ const ExperienceLevelPickerForm = class extends React.Component<
   };
 
   handleButtonOnClickMatchmake = async (): Promise<void> => {
-    const { game } = this.props;
+    const { game } = this.state;
     if (!game) {
       return console.error('must provide a game when creating component');
     }

@@ -1,8 +1,9 @@
 import { Box, GridList, GridListTile, GridListTileBar } from '@material-ui/core';
 import React from 'react';
+import { RouteComponentProps } from 'react-router-dom';
 import { Game } from '../interfaces/Game';
 
-export interface GamesListProps {
+export interface GamesListProps extends RouteComponentProps {
   results: Game[];
 }
 
@@ -40,12 +41,11 @@ const GamesList = class extends React.PureComponent<GamesListProps, GamesListSta
 
   handleGameOnClick = (event: any): void => {
     const { id } = event.target;
-    const { results } = this.props;
+    const { history, results } = this.props;
     const game = results.find((g) => g.id.toString() === id);
 
     if (game) {
-      console.log(game);
-      // TODO: navigate to select skill level page
+      history.push('/ExperienceLevelPickerForm', { game });
     }
   };
 };

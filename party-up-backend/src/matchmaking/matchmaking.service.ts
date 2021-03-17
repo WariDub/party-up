@@ -22,17 +22,13 @@ export class MatchmakingService {
         createMatchmakingEntryDto: CreateMatchmakingEntryDto,
     ): Promise<Match[]> {
         const { game, experience } = createMatchmakingEntryDto;
-        const entries = this.matchmakings[game.id];
-        if (!entries) {
+        if (!this.matchmakings[game.id]) {
             this.matchmakings[game.id] = [];
         }
+
         const matches: Match[] = [];
 
-        for (const entry of entries) {
-            // skip entries that are for this user
-            if (entry.user.getId() === user.getId()) {
-                continue;
-            }
+        for (const entry of this.matchmakings[game.id]) {
             const match = new Match();
             match.entry = entry;
             match.percentage = this.calculateMatchPercentage(user, entry);
