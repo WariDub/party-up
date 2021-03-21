@@ -42,7 +42,7 @@ export class Auth {
       );
     }
     Auth.instance = this;
-    // this.isAuthenticated = localStorage.getItem('token') != null;
+    this.isAuthenticated = localStorage.getItem('token') != null;
   }
 
   public static getInstance(): Auth {
