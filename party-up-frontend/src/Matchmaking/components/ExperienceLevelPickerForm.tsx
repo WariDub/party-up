@@ -17,7 +17,6 @@ import { BACKEND_URL } from '../../globals';
 import { Game } from '../../Search/interfaces/Game';
 import CreateMatchmakingEntryDto from '../dtos/create-matchmaking-entry.dto';
 import Experience from '../enums/experience.enum';
-import Match from '../models/match.model';
 
 export interface ExperienceLevelPickerFormProps extends RouteComponentProps {}
 
@@ -122,9 +121,8 @@ const ExperienceLevelPickerForm = class extends React.Component<
     };
 
     try {
-      const matches: Match[] = await axios.default.post(reqUrl, data, config);
-      console.log(matches);
-      // TODO: navigate to user matches page
+      const res = await axios.default.post(reqUrl, data, config);
+      this.props.history.push('/MatchmakingPage', { matches: res.data });
     } catch (e) {
       console.error(e);
     }
