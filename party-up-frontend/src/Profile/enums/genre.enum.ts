@@ -11,6 +11,7 @@ enum Genre {
   RPG = 'RPG',
   MMO = 'MMO',
   MMORPG = 'MMORPG',
+  RACING = 'Racing',
   STRATEGY = 'Strategy',
 }
 
