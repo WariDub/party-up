@@ -1,11 +1,13 @@
 import React from 'react';
-import { AppBar, Toolbar, Typography, TextField, Box } from '@material-ui/core';
+import { AppBar, Toolbar, Typography, TextField, Box, Button, Grid } from '@material-ui/core';
 import * as axios from 'axios';
 import { Game } from '../interfaces/Game';
 import { BACKEND_URL } from '../../globals';
+import { RouteComponentProps } from 'react-router-dom';
 
-export interface NavBarProps {
-  onQueryResult: (data: Game[]) => void;
+export interface NavBarProps extends RouteComponentProps {
+  showSearchBar: boolean;
+  onQueryResult: ((data: Game[]) => void) | null;
 }
 
 export interface NavBarState {
@@ -22,30 +24,44 @@ const NavBar = class extends React.PureComponent<NavBarProps, NavBarState> {
   }
 
   render(): JSX.Element {
+    const { showSearchBar } = this.props;
+
     return (
       <AppBar position="static" color="default">
         <Toolbar>
           <Typography variant="h6">PartyUp</Typography>
-          <Box m={1} mx="auto">
-            <TextField
-              variant="filled"
-              label="Enter game name"
-              onChange={this.handleTextFieldOnChange}
-              onKeyDown={this.handleTextFieldOnKeyDown}
-            />
-          </Box>
+          {showSearchBar ? this.renderSearchBar() : null}
+          <Grid justify="flex-end">
+            <Button onClick={this.didClickButtonProfile}>Profile</Button>
+          </Grid>
+          <Grid justify="flex-end">
+            <Button onClick={this.didClickButtonLogout}>Logout</Button>
+          </Grid>
         </Toolbar>
       </AppBar>
     );
   }
 
-  handleTextFieldOnChange = (
+  renderSearchBar(): JSX.Element {
+    return (
+      <Box m={1} mx="auto">
+        <TextField
+          variant="filled"
+          label="Enter game name"
+          onChange={this.handleSearchBarOnChange}
+          onKeyDown={this.handleSearchBarOnKeyDown}
+        />
+      </Box>
+    );
+  }
+
+  handleSearchBarOnChange = (
     field: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
   ): void => {
     this.setState({ query: field.target.value });
   };
 
-  handleTextFieldOnKeyDown = (event: any): void => {
+  handleSearchBarOnKeyDown = (event: any): void => {
     if (event.keyCode === 13) {
       this.didSubmitQuery();
     }
@@ -63,10 +79,21 @@ const NavBar = class extends React.PureComponent<NavBarProps, NavBarState> {
     try {
       const res = await axios.default.get(reqUrl, config);
       const { onQueryResult } = this.props;
-      onQueryResult(res.data);
+      if (onQueryResult) {
+        onQueryResult(res.data);
+      }
     } catch (e) {
       console.log(e);
     }
+  };
+
+  didClickButtonProfile = (): void => {
+    this.props.history.push('/ProfilePage');
+  };
+
+  didClickButtonLogout = (): void => {
+    // TODO: add function in auth.api to logout which clears the token and sets isAuthenticated to false
+    this.props.history.push('/AuthenticationForm');
   };
 };
 
