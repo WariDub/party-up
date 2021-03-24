@@ -20,7 +20,7 @@ import { GetUsersFilterDto } from './dtos/get-users-filter.dto';
 export class UsersController {
     constructor(private readonly usersService: UsersService) {}
 
-    @Get('/users')
+    @Get()
     async getUsers(@Query(ValidationPipe) getUsersFilterDto: GetUsersFilterDto): Promise<User[]> {
         return this.usersService.getUsers(getUsersFilterDto);
     }

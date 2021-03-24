@@ -8,6 +8,7 @@ interface User {
   displayName: string;
   email: string;
   avatarUrl: string;
+  friends: string[];
   age?: number;
   gender?: Gender;
   favoriteGenre?: Genre;
