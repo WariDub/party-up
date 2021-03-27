@@ -21,8 +21,11 @@ import { EditUserDto } from '../dtos/edit-user.dto';
 import Gender from '../enums/gender.enum';
 import Genre from '../enums/genre.enum';
 import Role from '../enums/role.enum';
+import User from '../models/user.model';
 
-export interface EditProfileFormProps {}
+export interface EditProfileFormProps {
+  user: User | null;
+}
 
 export interface EditProfileFormState {
   age: number;
@@ -35,11 +38,13 @@ const EditProfileForm = class extends React.Component<EditProfileFormProps, Edit
   constructor(props: EditProfileFormProps) {
     super(props);
 
+    const { user } = props;
+
     this.state = {
-      age: 0,
-      gender: Gender.OTHER,
-      favoriteGenre: Genre.ACTION,
-      favoriteRole: Role.DPS,
+      age: user?.age || 0,
+      gender: user?.gender || Gender.OTHER,
+      favoriteGenre: user?.favoriteGenre || Genre.ACTION,
+      favoriteRole: user?.favoriteRole || Role.DPS,
     };
   }
 
@@ -83,10 +88,12 @@ const EditProfileForm = class extends React.Component<EditProfileFormProps, Edit
   }
 
   renderQuestionAge(): JSX.Element {
+    const { age } = this.state;
+
     return (
       <Grid item xs={10}>
         <FormControl fullWidth variant="filled">
-          <TextField variant="filled" label="Age" onChange={this.handleChangeAge} />
+          <TextField variant="filled" label="Age" value={age} onChange={this.handleChangeAge} />
         </FormControl>
       </Grid>
     );

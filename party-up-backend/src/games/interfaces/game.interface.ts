@@ -1,5 +1,5 @@
 export interface Game {
-    id: string;
+    id: number;
     cover: { [key: string]: string };
     genres: { [key: string]: string };
     name: string;

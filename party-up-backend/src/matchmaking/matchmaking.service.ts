@@ -10,7 +10,7 @@ import { MatchmakingEntry } from './models/matchmaking-entry.model';
 
 @Injectable()
 export class MatchmakingService {
-    private matchmakings: { [key: string]: MatchmakingEntry[] } = {};
+    private matchmakings: Map<number, Map<string, MatchmakingEntry>> = new Map();
 
     constructor() {
         this.generateDummyEntries();
@@ -22,37 +22,87 @@ export class MatchmakingService {
         createMatchmakingEntryDto: CreateMatchmakingEntryDto,
     ): Promise<Match[]> {
         const { game, experience } = createMatchmakingEntryDto;
-        const entries = this.matchmakings[game.id];
-        if (!entries) {
-            this.matchmakings[game.id] = [];
-        }
-        const matches: Match[] = [];
-
-        for (const entry of entries) {
-            // skip entries that are for this user
-            if (entry.user.getId() === user.getId()) {
-                continue;
-            }
-            const match = new Match();
-            match.entry = entry;
-            match.percentage = this.calculateMatchPercentage(user, entry);
-            matches.push(match);
-        }
-
         const newEntry = new MatchmakingEntry();
         newEntry.user = user;
         newEntry.experience = experience;
         newEntry.createdAt = Date.now();
-        this.matchmakings[game.id].push(newEntry);
 
-        return matches;
+        if (!this.matchmakings.has(game.id)) {
+            this.matchmakings.set(game.id, new Map());
+        }
+        if (this.matchmakings.get(game.id).has(user.username)) {
+            this.matchmakings.get(game.id).delete(user.username);
+        }
+
+        const matches: Match[] = [];
+
+        for (const entry of this.matchmakings.get(game.id).values()) {
+            const match = new Match();
+            match.entry = entry;
+            match.percentage = this.calculateMatchPercentage(newEntry, entry);
+            matches.push(match);
+        }
+
+        this.matchmakings.get(game.id).set(user.username, newEntry);
+        return matches.sort((a, b) => b.percentage - a.percentage);
     }
 
-    private calculateMatchPercentage(matchUser: User, entry: MatchmakingEntry): number {
-        // TODO: calculate a percentage based on given information
-        const { user, experience } = entry;
-        const { age, gender, favoriteGenre, favoriteRole } = user;
-        return 0;
+    private calculateMatchPercentage(requester: MatchmakingEntry, entry: MatchmakingEntry): number {
+        let maxPoints = 0;
+        let points = 0;
+
+        // experience
+        maxPoints += 6;
+        if (requester.experience === entry.experience) {
+            points += 6;
+        } else if (
+            requester.experience === Experience.BEGINNER &&
+            entry.experience === Experience.INTERMEDIATE
+        ) {
+            points += 2;
+        } else if (requester.experience === Experience.INTERMEDIATE) {
+            points += 2;
+        } else if (
+            requester.experience === Experience.ADVANCED &&
+            entry.experience === Experience.INTERMEDIATE
+        ) {
+            points += 1;
+        }
+
+        // age group
+        maxPoints += 6;
+        const requesterAge = requester.user.age;
+        const entryAge = entry.user.age;
+
+        if (this.numberIsBetween(requesterAge - 4, requesterAge + 4, entryAge)) {
+            points += 6;
+        } else if (this.numberIsBetween(requesterAge - 8, requesterAge + 8, entryAge)) {
+            points += 4;
+        } else if (this.numberIsBetween(requesterAge - 10, requesterAge + 10, entryAge)) {
+            points += 2;
+        } else {
+            points += 0.5;
+        }
+
+        // gender
+        maxPoints += 2;
+        if (requester.user.gender === entry.user.gender) {
+            points += 2;
+        }
+
+        // favorite genre
+        maxPoints += 3;
+        if (requester.user.favoriteGenre === entry.user.favoriteGenre) {
+            points += 3;
+        }
+
+        // favorite role
+        maxPoints += 3;
+        if (requester.user.favoriteRole === entry.user.favoriteRole) {
+            points += 3;
+        }
+
+        return Math.round((points / maxPoints) * 100);
     }
 
     private generateDummyEntries() {
@@ -70,7 +120,7 @@ export class MatchmakingService {
             user.email = `test${i}@test.com`;
             user.salt = `test${i}`;
             user.password = `test${i}`;
-            user.age = this.randomIntFromInterval(8, 100);
+            user.age = this.randomIntFromInterval(8, 70);
             user.gender = genders[this.randomIntFromInterval(0, genders.length - 1)];
             user.favoriteGenre = genres[this.randomIntFromInterval(0, genres.length - 1)];
             user.favoriteRole = roles[this.randomIntFromInterval(0, roles.length - 1)];
@@ -82,15 +132,18 @@ export class MatchmakingService {
             entry.createdAt = Date.now();
 
             const gameId = gameIds[this.randomIntFromInterval(0, gameIds.length - 1)];
-            const entries = this.matchmakings[gameId];
-            if (!entries) {
-                this.matchmakings[gameId] = [];
+            if (!this.matchmakings.has(gameId)) {
+                this.matchmakings.set(gameId, new Map());
             }
-            this.matchmakings[gameId].push(entry);
+            this.matchmakings.get(gameId).set(user.username, entry);
         }
     }
 
     private randomIntFromInterval(min: number, max: number) {
         return Math.floor(Math.random() * (max - min + 1) + min);
+    }
+
+    private numberIsBetween(min: number, max: number, x: number): boolean {
+        return x >= min && x <= max;
     }
 }

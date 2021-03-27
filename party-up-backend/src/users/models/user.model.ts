@@ -78,7 +78,7 @@ export class User {
     createdAt: number;
 
     @prop({
-        required: false
+        required: false,
     })
     friends: [string];
 
