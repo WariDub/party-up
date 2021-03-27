@@ -42,6 +42,7 @@ export interface SICredential {
             throw new Error("Error: Instantiation failed: Use SingletonClass.getInstance() instead of new.");
         }
         Auth.instance = this;
+       // this.isAuthenticated = localStorage.getItem('token') != null
        }
 
        public static getInstance():Auth
