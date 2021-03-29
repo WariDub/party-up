@@ -7,6 +7,7 @@ import { CreateMatchmakingEntryDto } from './dtos/create-matchmaking-entry.dto';
 import { Experience } from './enums/experience.enum';
 import { Match } from './models/match.model';
 import { MatchmakingEntry } from './models/matchmaking-entry.model';
+import * as nodeRandomName from 'node-random-name';
 
 @Injectable()
 export class MatchmakingService {
@@ -116,12 +117,18 @@ export class MatchmakingService {
             const user = new User();
             user['_id'] = i.toString();
             user.username = `testuser${i}`;
-            user.displayName = `testuser${i}`;
+            // user.displayName = `testuser${i}`;
+
             user.email = `test${i}@test.com`;
             user.salt = `test${i}`;
             user.password = `test${i}`;
             user.age = this.randomIntFromInterval(8, 70);
             user.gender = genders[this.randomIntFromInterval(0, genders.length - 1)];
+
+            user.displayName = nodeRandomName({
+                random: Math.random,
+            });
+
             user.favoriteGenre = genres[this.randomIntFromInterval(0, genres.length - 1)];
             user.favoriteRole = roles[this.randomIntFromInterval(0, roles.length - 1)];
             user.createdAt = Date.now();

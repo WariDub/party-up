@@ -18,6 +18,8 @@ const MatchmakingPage = class extends React.Component<MatchmakingPageProps, Matc
     this.state = {
       matches: matches,
     };
+
+    console.log(matches);
   }
 
   render(): JSX.Element {
@@ -26,7 +28,13 @@ const MatchmakingPage = class extends React.Component<MatchmakingPageProps, Matc
 
     return (
       <>
-        {/* <NavBar onQueryResult={null} /> */}
+        <NavBar
+          history={history}
+          location={location}
+          match={match}
+          showSearchBar={false}
+          onQueryResult={null}
+        />
         <MatchesList history={history} location={location} match={match} matches={matches} />
       </>
     );

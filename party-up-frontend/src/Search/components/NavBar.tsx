@@ -4,6 +4,7 @@ import * as axios from 'axios';
 import { Game } from '../interfaces/Game';
 import { BACKEND_URL } from '../../globals';
 import { RouteComponentProps } from 'react-router-dom';
+import { Auth } from '../../Auth/auth.api';
 
 export interface NavBarProps extends RouteComponentProps {
   showSearchBar: boolean;
@@ -92,7 +93,7 @@ const NavBar = class extends React.PureComponent<NavBarProps, NavBarState> {
   };
 
   didClickButtonLogout = (): void => {
-    // TODO: add function in auth.api to logout which clears the token and sets isAuthenticated to false
+    Auth.getInstance().onLogout();
     this.props.history.push('/AuthenticationForm');
   };
 };

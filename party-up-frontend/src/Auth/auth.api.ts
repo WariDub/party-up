@@ -88,4 +88,9 @@ export class Auth {
       return { error: e.response.data.message };
     }
   };
+
+  onLogout = () => {
+    localStorage.removeItem('token');
+    this.isAuthenticated = false;
+  };
 }
