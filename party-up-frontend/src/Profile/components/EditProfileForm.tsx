@@ -100,8 +100,15 @@ const EditProfileForm = class extends React.Component<EditProfileFormProps, Edit
   }
 
   handleChangeAge = (event: React.ChangeEvent<{ value: unknown }>): void => {
-    const value = event.target.value as string;
-    this.setState({ age: parseInt(value, 10) });
+    let value = event.target.value as string;
+    if (!value) {
+      value = '0';
+    }
+    const age = parseInt(value, 10);
+    if (isNaN(age)) {
+      return;
+    }
+    this.setState({ age });
   };
 
   // eslint-disable-next-line class-methods-use-this
