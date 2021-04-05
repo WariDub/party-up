@@ -1,5 +1,5 @@
 import React from 'react';
-import { AppBar, Toolbar, Typography, TextField, Box, Button, Grid } from '@material-ui/core';
+import { AppBar, Toolbar, Typography, TextField, Box, Button, Grid, Link } from '@material-ui/core';
 import * as axios from 'axios';
 import { Game } from '../interfaces/Game';
 import { BACKEND_URL } from '../../globals';
@@ -30,8 +30,10 @@ const NavBar = class extends React.PureComponent<NavBarProps, NavBarState> {
     return (
       <AppBar position="static" color="default">
         <Toolbar>
-          <Typography variant="h6">PartyUp</Typography>
-          {showSearchBar ? this.renderSearchBar() : null}
+          <Typography variant="h6">
+            <Link href="/">PartyUp</Link>
+          </Typography>
+          {showSearchBar ? this.renderSearchBar() : <Box m={1} mx="auto" />}
           <Grid justify="flex-end">
             <Button onClick={this.didClickButtonProfile}>Profile</Button>
           </Grid>
