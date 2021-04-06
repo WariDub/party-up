@@ -47,7 +47,9 @@ const ProfilePage = class extends React.Component<ProfilePageProps, ProfilePageS
           showSearchBar={false}
           onQueryResult={null}
         />
-        {user ? <EditProfileForm user={user} /> : null}
+        {user ? (
+          <EditProfileForm history={history} location={location} match={match} user={user} />
+        ) : null}
         <FriendList friends={friends} />
       </>
     );

@@ -15,6 +15,7 @@ import {
 import * as axios from 'axios';
 import * as jwtDecode from 'jwt-decode';
 import React from 'react';
+import { RouteComponentProps } from 'react-router-dom';
 import { JwtPayload } from '../../Auth/interfaces/jwt-payload.interface';
 import { BACKEND_URL } from '../../globals';
 import { EditUserDto } from '../dtos/edit-user.dto';
@@ -23,7 +24,7 @@ import Genre from '../enums/genre.enum';
 import Role from '../enums/role.enum';
 import User from '../models/user.model';
 
-export interface EditProfileFormProps {
+export interface EditProfileFormProps extends RouteComponentProps {
   user: User | null;
 }
 
@@ -202,6 +203,7 @@ const EditProfileForm = class extends React.Component<EditProfileFormProps, Edit
     try {
       const user = await axios.default.patch(reqUrl, data, config);
       console.log(user);
+      this.props.history.push('/');
     } catch (e) {
       console.error(e);
     }
