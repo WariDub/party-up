@@ -51,24 +51,28 @@ export class User {
 
     @prop({
         required: false,
+        default: 0,
     })
     age?: number;
 
     @prop({
         required: false,
         enum: Gender,
+        default: Gender.OTHER,
     })
     gender?: Gender;
 
     @prop({
         required: false,
         enum: Genre,
+        default: Genre.ACTION,
     })
     favoriteGenre?: Genre;
 
     @prop({
         required: false,
         enum: Role,
+        default: Role.DPS,
     })
     favoriteRole?: Role;
 

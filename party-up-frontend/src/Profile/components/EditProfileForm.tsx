@@ -25,10 +25,11 @@ import Role from '../enums/role.enum';
 import User from '../models/user.model';
 
 export interface EditProfileFormProps extends RouteComponentProps {
-  user: User | null;
+  user: User;
 }
 
 export interface EditProfileFormState {
+  displayName: string;
   age: number;
   gender: Gender;
   favoriteGenre: Genre;
@@ -42,10 +43,11 @@ const EditProfileForm = class extends React.Component<EditProfileFormProps, Edit
     const { user } = props;
 
     this.state = {
-      age: user?.age || 0,
-      gender: user?.gender || Gender.OTHER,
-      favoriteGenre: user?.favoriteGenre || Genre.ACTION,
-      favoriteRole: user?.favoriteRole || Role.DPS,
+      displayName: user.displayName,
+      age: user.age,
+      gender: user.gender,
+      favoriteGenre: user.favoriteGenre,
+      favoriteRole: user.favoriteRole,
     };
   }
 
@@ -69,6 +71,7 @@ const EditProfileForm = class extends React.Component<EditProfileFormProps, Edit
             <Grid item xs={10}>
               <Typography variant="h6">Profile</Typography>
             </Grid>
+            {this.renderFieldDisplayName()}
             {this.renderQuestionAge()}
             {this.renderQuestionGender()}
             {this.renderQuestionFavoriteGenre()}
@@ -88,6 +91,23 @@ const EditProfileForm = class extends React.Component<EditProfileFormProps, Edit
     );
   }
 
+  renderFieldDisplayName(): JSX.Element {
+    const { displayName } = this.state;
+
+    return (
+      <Grid item xs={10}>
+        <FormControl fullWidth variant="filled">
+          <TextField
+            variant="filled"
+            label="Display Name"
+            value={displayName}
+            onChange={this.handleChangeDisplayName}
+          />
+        </FormControl>
+      </Grid>
+    );
+  }
+
   renderQuestionAge(): JSX.Element {
     const { age } = this.state;
 
@@ -99,18 +119,6 @@ const EditProfileForm = class extends React.Component<EditProfileFormProps, Edit
       </Grid>
     );
   }
-
-  handleChangeAge = (event: React.ChangeEvent<{ value: unknown }>): void => {
-    let value = event.target.value as string;
-    if (!value) {
-      value = '0';
-    }
-    const age = parseInt(value, 10);
-    if (isNaN(age)) {
-      return;
-    }
-    this.setState({ age });
-  };
 
   // eslint-disable-next-line class-methods-use-this
   renderFieldWithChoices(
@@ -160,6 +168,23 @@ const EditProfileForm = class extends React.Component<EditProfileFormProps, Edit
     );
   }
 
+  handleChangeDisplayName = (event: React.ChangeEvent<{ value: unknown }>): void => {
+    let value = event.target.value as string;
+    this.setState({ displayName: value });
+  };
+
+  handleChangeAge = (event: React.ChangeEvent<{ value: unknown }>): void => {
+    let value = event.target.value as string;
+    if (!value) {
+      value = '0';
+    }
+    const age = parseInt(value, 10);
+    if (isNaN(age)) {
+      return;
+    }
+    this.setState({ age });
+  };
+
   handleChangeGender = (event: React.ChangeEvent<{ value: unknown }>): void => {
     const value = event.target.value as Gender;
     this.setState({ gender: value });
@@ -176,12 +201,13 @@ const EditProfileForm = class extends React.Component<EditProfileFormProps, Edit
   };
 
   handleButtonOnClickSaveChanges = async (): Promise<void> => {
-    const { age, gender, favoriteGenre, favoriteRole } = this.state;
+    const { displayName, age, gender, favoriteGenre, favoriteRole } = this.state;
     if (typeof age !== 'number') {
       return console.error('age should be a number');
     }
 
     const data: EditUserDto = {
+      displayName,
       age,
       gender,
       favoriteGenre,

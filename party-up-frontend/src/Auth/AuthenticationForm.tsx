@@ -30,7 +30,7 @@ export const AuthenticationForm = (props: any) => {
         setError(response.error);
       }
       if (auth.getAuthenticated()) {
-        props.history.push('/');
+        props.history.push('/ProfilePage');
       }
     } else {
       setError('password and repeated password must match');

@@ -9,10 +9,10 @@ interface User {
   email: string;
   avatarUrl: string;
   friends: string[];
-  age?: number;
-  gender?: Gender;
-  favoriteGenre?: Genre;
-  favoriteRole?: Role;
+  age: number;
+  gender: Gender;
+  favoriteGenre: Genre;
+  favoriteRole: Role;
   createdAt: number;
 }
 
