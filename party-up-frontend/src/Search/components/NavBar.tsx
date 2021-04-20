@@ -83,7 +83,7 @@ const NavBar = class extends React.PureComponent<NavBarProps, NavBarState> {
       const res = await axios.default.get(reqUrl, config);
       const { onQueryResult } = this.props;
       if (onQueryResult) {
-        onQueryResult(res.data);
+        onQueryResult(res.data || null);
       }
     } catch (e) {
       console.log(e);

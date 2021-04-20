@@ -7,7 +7,7 @@ import { Game } from './interfaces/Game';
 export interface SearchPageProps extends RouteComponentProps {}
 
 export interface SearchPageState {
-  results: Game[];
+  results: Game[] | null;
 }
 
 const SearchPage = class extends React.PureComponent<SearchPageProps, SearchPageState> {
@@ -37,7 +37,7 @@ const SearchPage = class extends React.PureComponent<SearchPageProps, SearchPage
     );
   }
 
-  onQueryResult = (data: Game[]): void => {
+  onQueryResult = (data: Game[] | null): void => {
     this.setState({ results: data });
   };
 };

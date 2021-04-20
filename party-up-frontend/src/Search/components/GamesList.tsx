@@ -4,7 +4,7 @@ import { RouteComponentProps } from 'react-router-dom';
 import { Game } from '../interfaces/Game';
 
 export interface GamesListProps extends RouteComponentProps {
-  results: Game[];
+  results: Game[] | null;
 }
 
 export interface GamesListState {}
@@ -16,7 +16,7 @@ const GamesList = class extends React.PureComponent<GamesListProps, GamesListSta
     return (
       <Box p={1}>
         <GridList spacing={8} cellHeight="auto" cols={0}>
-          {results.map((result) => (
+          {results?.map((result) => (
             <GridListTile key={result.id} onClick={this.handleGameOnClick}>
               <img src={this.getGameCoverUrl(result)} alt={result.name} id={result.id} />
               <GridListTileBar title={result.name} />
@@ -42,7 +42,7 @@ const GamesList = class extends React.PureComponent<GamesListProps, GamesListSta
   handleGameOnClick = (event: any): void => {
     const { id } = event.target;
     const { history, results } = this.props;
-    const game = results.find((g) => g.id.toString() === id);
+    const game = results?.find((g) => g.id.toString() === id);
 
     if (game) {
       history.push('/ExperienceLevelPickerForm', { game });
