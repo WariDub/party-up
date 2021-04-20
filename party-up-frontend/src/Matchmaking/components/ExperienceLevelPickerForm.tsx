@@ -9,6 +9,7 @@ import {
   FormControlLabel,
   Radio,
   RadioGroup,
+  TextField,
 } from '@material-ui/core';
 import * as axios from 'axios';
 import React from 'react';
@@ -22,6 +23,7 @@ export interface ExperienceLevelPickerFormProps extends RouteComponentProps {}
 
 export interface ExperienceLevelPickerFormState {
   game?: Game;
+  identifier: string;
   experience: Experience;
 }
 
@@ -35,6 +37,7 @@ const ExperienceLevelPickerForm = class extends React.Component<
     const { game } = props.location.state as ExperienceLevelPickerFormState;
     this.state = {
       game: game,
+      identifier: '',
       experience: Experience.BEGINNER,
     };
   }
@@ -52,6 +55,8 @@ const ExperienceLevelPickerForm = class extends React.Component<
   }
 
   renderCard(): JSX.Element {
+    const { identifier } = this.state;
+
     return (
       <Card elevation={3}>
         <CardContent>
@@ -59,6 +64,13 @@ const ExperienceLevelPickerForm = class extends React.Component<
             <Grid item xs={10}>
               <Typography variant="h6">How experienced are you?</Typography>
               {this.renderRadioButtons()}
+              <Typography variant="h6">What is your in-game name?</Typography>
+              <TextField
+                variant="filled"
+                label="In-game Name"
+                value={identifier}
+                onChange={this.handleChangeIdentifier}
+              />
             </Grid>
           </Grid>
         </CardContent>
@@ -102,14 +114,19 @@ const ExperienceLevelPickerForm = class extends React.Component<
     this.setState({ experience: value });
   };
 
+  handleChangeIdentifier = (event: React.ChangeEvent<{ value: unknown }>): void => {
+    let value = event.target.value as string;
+    this.setState({ identifier: value });
+  };
+
   handleButtonOnClickMatchmake = async (): Promise<void> => {
-    const { game } = this.state;
+    const { game, identifier, experience } = this.state;
     if (!game) {
       return console.error('must provide a game when creating component');
     }
-    const { experience } = this.state;
     const data: CreateMatchmakingEntryDto = {
       game,
+      identifier,
       experience,
     };
 

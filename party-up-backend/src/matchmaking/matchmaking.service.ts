@@ -22,9 +22,11 @@ export class MatchmakingService {
         user: User,
         createMatchmakingEntryDto: CreateMatchmakingEntryDto,
     ): Promise<Match[]> {
-        const { game, experience } = createMatchmakingEntryDto;
+        const { game, identifier, experience } = createMatchmakingEntryDto;
         const newEntry = new MatchmakingEntry();
+        user.hideSensitiveInfo();
         newEntry.user = user;
+        newEntry.identifier = identifier;
         newEntry.experience = experience;
         newEntry.createdAt = Date.now();
 
@@ -135,6 +137,7 @@ export class MatchmakingService {
 
             const entry = new MatchmakingEntry();
             entry.user = user;
+            entry.identifier = user.username;
             entry.experience = experience[this.randomIntFromInterval(0, experience.length - 1)];
             entry.createdAt = Date.now();
 

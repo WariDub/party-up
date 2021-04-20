@@ -3,6 +3,7 @@ import Experience from '../enums/experience.enum';
 
 interface CreateMatchmakingEntryDto {
   readonly game: Game;
+  readonly identifier: string;
   readonly experience: Experience;
 }
 

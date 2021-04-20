@@ -31,7 +31,7 @@ const MatchesList = class extends React.PureComponent<MatchesListProps, MatchesL
       <Card>
         <CardContent>
           <h3>{match.entry.user.displayName}</h3>
-          <h5>{`@${match.entry.user.username}`}</h5>
+          <h5>{`${match.entry.identifier}`}</h5>
           <h5>{`${match.percentage}% match`}</h5>
         </CardContent>
       </Card>
