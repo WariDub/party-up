@@ -1,0 +1,54 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FriendList It should render the FriendsList, with all of the correct properties 1`] = `
+<div
+  className="MuiBox-root MuiBox-root-1"
+>
+  <div
+    className="MuiGrid-root MuiGrid-container MuiGrid-justify-xs-center"
+  >
+    <div
+      className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-8"
+    >
+      <ul
+        className="MuiGridList-root"
+        style={
+          Object {
+            "margin": -4,
+          }
+        }
+      >
+        <li
+          className="MuiGridListTile-root"
+          style={
+            Object {
+              "height": "auto",
+              "padding": 4,
+              "width": "Infinity%",
+            }
+          }
+        >
+          <div
+            className="MuiGridListTile-tile"
+          >
+            <div
+              className="MuiPaper-root MuiCard-root MuiPaper-elevation1 MuiPaper-rounded"
+            >
+              <div
+                className="MuiCardContent-root"
+              >
+                <h3>
+                  TestDisplayName
+                </h3>
+                <h5>
+                  @TestUsername
+                </h5>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+`;
