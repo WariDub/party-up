@@ -1,7 +1,4 @@
-import  ProfilePage  from '../ProfilePage';
-import React from "react";
-import { render, unmountComponentAtNode } from "react-dom";
-import { act } from "react-dom/test-utils";
+import  ProfilePage  from '../ProfilePage';;
 import { shallow } from 'enzyme';
 import { createBrowserHistory } from 'history';
 import { matchPath } from 'react-router';
