@@ -1,0 +1,295 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EditProfileForm It should render the EditProfileForm, and display all of the appropriate fields 1`] = `
+<div
+  className="MuiBox-root MuiBox-root-1"
+>
+  <div
+    className="MuiGrid-root MuiGrid-container MuiGrid-justify-xs-center"
+  >
+    <div
+      className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-8"
+    >
+      <div
+        className="MuiPaper-root MuiCard-root MuiPaper-elevation3 MuiPaper-rounded"
+      >
+        <div
+          className="MuiCardContent-root"
+        >
+          <div
+            className="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 MuiGrid-justify-xs-center"
+          >
+            <div
+              className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-10"
+            >
+              <h6
+                className="MuiTypography-root MuiTypography-h6"
+              >
+                Profile
+              </h6>
+            </div>
+            <div
+              className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-10"
+            >
+              <div
+                className="MuiFormControl-root MuiFormControl-fullWidth"
+              >
+                <div
+                  className="MuiFormControl-root MuiTextField-root"
+                >
+                  <label
+                    className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-filled MuiFormLabel-filled"
+                    data-shrink={true}
+                  >
+                    Display Name
+                  </label>
+                  <div
+                    className="MuiInputBase-root MuiFilledInput-root MuiFilledInput-underline MuiInputBase-formControl"
+                    onClick={[Function]}
+                  >
+                    <input
+                      aria-invalid={false}
+                      autoFocus={false}
+                      className="MuiInputBase-input MuiFilledInput-input"
+                      disabled={false}
+                      onAnimationStart={[Function]}
+                      onBlur={[Function]}
+                      onChange={[Function]}
+                      onFocus={[Function]}
+                      required={false}
+                      type="text"
+                      value="TestDisplayName"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-10"
+            >
+              <div
+                className="MuiFormControl-root MuiFormControl-fullWidth"
+              >
+                <div
+                  className="MuiFormControl-root MuiTextField-root"
+                >
+                  <label
+                    className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-filled MuiFormLabel-filled"
+                    data-shrink={true}
+                  >
+                    Age
+                  </label>
+                  <div
+                    className="MuiInputBase-root MuiFilledInput-root MuiFilledInput-underline MuiInputBase-formControl"
+                    onClick={[Function]}
+                  >
+                    <input
+                      aria-invalid={false}
+                      autoFocus={false}
+                      className="MuiInputBase-input MuiFilledInput-input"
+                      disabled={false}
+                      onAnimationStart={[Function]}
+                      onBlur={[Function]}
+                      onChange={[Function]}
+                      onFocus={[Function]}
+                      required={false}
+                      type="text"
+                      value={23}
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-10"
+            >
+              <div
+                className="MuiFormControl-root MuiFormControl-fullWidth"
+              >
+                <label
+                  className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-filled MuiFormLabel-filled"
+                  data-shrink={true}
+                >
+                  Gender
+                </label>
+                <div
+                  className="MuiInputBase-root MuiFilledInput-root MuiFilledInput-underline MuiInputBase-formControl"
+                  onClick={[Function]}
+                >
+                  <div
+                    aria-haspopup="listbox"
+                    className="MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiSelect-filled MuiInputBase-input MuiFilledInput-input"
+                    onBlur={[Function]}
+                    onFocus={[Function]}
+                    onKeyDown={[Function]}
+                    onMouseDown={[Function]}
+                    role="button"
+                    tabIndex={0}
+                  >
+                    Male
+                  </div>
+                  <input
+                    aria-hidden={true}
+                    className="MuiSelect-nativeInput"
+                    onAnimationStart={[Function]}
+                    onChange={[Function]}
+                    required={false}
+                    tabIndex={-1}
+                    value="Male"
+                  />
+                  <svg
+                    aria-hidden={true}
+                    className="MuiSvgIcon-root MuiSelect-icon MuiSelect-iconFilled"
+                    focusable="false"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M7 10l5 5 5-5z"
+                    />
+                  </svg>
+                </div>
+              </div>
+            </div>
+            <div
+              className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-10"
+            >
+              <div
+                className="MuiFormControl-root MuiFormControl-fullWidth"
+              >
+                <label
+                  className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-filled MuiFormLabel-filled"
+                  data-shrink={true}
+                >
+                  Favorite Genre
+                </label>
+                <div
+                  className="MuiInputBase-root MuiFilledInput-root MuiFilledInput-underline MuiInputBase-formControl"
+                  onClick={[Function]}
+                >
+                  <div
+                    aria-haspopup="listbox"
+                    className="MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiSelect-filled MuiInputBase-input MuiFilledInput-input"
+                    onBlur={[Function]}
+                    onFocus={[Function]}
+                    onKeyDown={[Function]}
+                    onMouseDown={[Function]}
+                    role="button"
+                    tabIndex={0}
+                  >
+                    Action
+                  </div>
+                  <input
+                    aria-hidden={true}
+                    className="MuiSelect-nativeInput"
+                    onAnimationStart={[Function]}
+                    onChange={[Function]}
+                    required={false}
+                    tabIndex={-1}
+                    value="Action"
+                  />
+                  <svg
+                    aria-hidden={true}
+                    className="MuiSvgIcon-root MuiSelect-icon MuiSelect-iconFilled"
+                    focusable="false"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M7 10l5 5 5-5z"
+                    />
+                  </svg>
+                </div>
+              </div>
+            </div>
+            <div
+              className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-10"
+            >
+              <div
+                className="MuiFormControl-root MuiFormControl-fullWidth"
+              >
+                <label
+                  className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-filled MuiFormLabel-filled"
+                  data-shrink={true}
+                >
+                  Favorite Role
+                </label>
+                <div
+                  className="MuiInputBase-root MuiFilledInput-root MuiFilledInput-underline MuiInputBase-formControl"
+                  onClick={[Function]}
+                >
+                  <div
+                    aria-haspopup="listbox"
+                    className="MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiSelect-filled MuiInputBase-input MuiFilledInput-input"
+                    onBlur={[Function]}
+                    onFocus={[Function]}
+                    onKeyDown={[Function]}
+                    onMouseDown={[Function]}
+                    role="button"
+                    tabIndex={0}
+                  >
+                    DPS
+                  </div>
+                  <input
+                    aria-hidden={true}
+                    className="MuiSelect-nativeInput"
+                    onAnimationStart={[Function]}
+                    onChange={[Function]}
+                    required={false}
+                    tabIndex={-1}
+                    value="DPS"
+                  />
+                  <svg
+                    aria-hidden={true}
+                    className="MuiSvgIcon-root MuiSelect-icon MuiSelect-iconFilled"
+                    focusable="false"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M7 10l5 5 5-5z"
+                    />
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          className="MuiCardActions-root MuiCardActions-spacing"
+        >
+          <div
+            className="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 MuiGrid-justify-xs-center"
+          >
+            <div
+              className="MuiGrid-root MuiGrid-item"
+            >
+              <button
+                className="MuiButtonBase-root MuiButton-root MuiButton-text"
+                disabled={false}
+                onBlur={[Function]}
+                onClick={[Function]}
+                onDragLeave={[Function]}
+                onFocus={[Function]}
+                onKeyDown={[Function]}
+                onKeyUp={[Function]}
+                onMouseDown={[Function]}
+                onMouseLeave={[Function]}
+                onMouseUp={[Function]}
+                onTouchEnd={[Function]}
+                onTouchMove={[Function]}
+                onTouchStart={[Function]}
+                tabIndex={0}
+                type="button"
+              >
+                <span
+                  className="MuiButton-label"
+                >
+                  Save Changes
+                </span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
