@@ -1,6 +1,6 @@
 import { shallow } from 'enzyme';
 import renderer from 'react-test-renderer'
-import  EditProfileForm  from '../components/EditProfileForm';
+import EditProfileForm  from '../components/EditProfileForm';
 import User from '../models/user.model';
 import Gender from '../enums/gender.enum';
 import Genre from '../enums/genre.enum';

@@ -46,14 +46,15 @@ describe('MatchestList', () => {
 
         expect(component.length).toBe(1);
     });
+    
     test('It should mount', () => {
         let history = createBrowserHistory();
         history.push('/');
 
         let location = history.location;
 
-        let match = matchPath('/',{
-            path: '/',
+        let match = matchPath('/MatchmakingPage',{
+            path: '/MatchmakingPage',
             exact: true,
             strict: false
         });
@@ -79,7 +80,9 @@ describe('MatchestList', () => {
             percentage: 80
         }
 
-        let component = renderer.create(<MatchesList history = { history } location = { location } matches = { [matchymatch] } match = { match }/>).toJSON();
+        let matches: Match[] = [matchymatch];
+
+        let component = renderer.create(<MatchesList history = { history } location = { location } matches = { matches } match = { match }/>).toJSON();
 
         expect(component).toMatchSnapshot();
     });
