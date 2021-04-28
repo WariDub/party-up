@@ -52,6 +52,8 @@
     "@types/enzyme": "^3.10.8",
     "@types/enzyme-adapter-react-16": "^1.0.6",
     "@types/react-router-dom": "^5.1.7",
-    "eslint": "^7.21.0"
+    "@types/react-test-renderer": "^17.0.1",
+    "eslint": "^7.21.0",
+    "ts-sinon": "^2.0.1"
   }
 }

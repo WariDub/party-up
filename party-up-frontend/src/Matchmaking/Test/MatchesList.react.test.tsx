@@ -7,6 +7,9 @@ import Match from '../models/match.model';
 import MatchmakingEntryModel from '../models/matchmaking-entry.model';
 import User from '../../Profile/models/user.model';
 import experience from '../../Matchmaking/enums/experience.enum';
+import Gender from '../../Profile/enums/gender.enum';
+import Genre from '../../Profile/enums/genre.enum';
+import Role from '../../Profile/enums/role.enum';
 
 describe('MatchestList', () => {
     test('It should mount', () => {
@@ -28,13 +31,18 @@ describe('MatchestList', () => {
             email: 'testEmail@testemail.com',
             avatarUrl: 'testURL',
             friends: ['TestFriend1', 'TestFriend2'],
-            createdAt: 4/27/2021
+            createdAt: 4/27/2021,
+            age: 21,
+            gender: Gender.MALE,
+            favoriteGenre: Genre.HORROR,
+            favoriteRole: Role.DPS
         }
 
         let entryMode: MatchmakingEntryModel = {
             user: user,
             experience: experience.BEGINNER,
-            createdAt: 4/27/2021
+            createdAt: 4/27/2021,
+            identifier: 'TestIdentifier'
         }
 
         let matchymatch: Match = {
@@ -66,13 +74,18 @@ describe('MatchestList', () => {
             email: 'testEmail@testemail.com',
             avatarUrl: 'testURL',
             friends: ['TestFriend1', 'TestFriend2'],
-            createdAt: 4/27/2021
+            createdAt: 4/27/2021,
+            age: 21,
+            gender: Gender.MALE,
+            favoriteGenre: Genre.HORROR,
+            favoriteRole: Role.DPS
         }
 
         let entryMode: MatchmakingEntryModel = {
             user: user,
             experience: experience.BEGINNER,
-            createdAt: 4/27/2021
+            createdAt: 4/27/2021,
+            identifier: 'TestIdentifier'
         }
 
         let matchymatch: Match = {

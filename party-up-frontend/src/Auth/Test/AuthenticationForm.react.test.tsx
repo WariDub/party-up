@@ -1,17 +1,14 @@
-import React, { ClassAttributes, Component, Props } from 'react';
-import { fireEvent, waitFor } from '@testing-library/react';
 import { shallow, mount } from 'enzyme';
 import { AuthenticationForm }  from '../AuthenticationForm';
-import { Auth, onSignUp } from '../auth.api';
-import NavBar from '../../Search/components/NavBar';
 import { render, unmountComponentAtNode } from "react-dom";
 import { act } from "react-dom/test-utils";
+import renderer from 'react-test-renderer';
 
 let container: any = null;
 
 describe('AuthenticationForm', () => {
 
-    test('It should mound', () => {
+    test('It should mount', () => {
         let component = shallow(<AuthenticationForm />);
 
         expect(component.length).toBe(1);
@@ -19,6 +16,7 @@ describe('AuthenticationForm', () => {
     
     test('It displays the Authentication Form', () => {
         let container: any = null;
+
         container = document.createElement("div");
         document.body.appendChild(container);
 
@@ -28,4 +26,11 @@ describe('AuthenticationForm', () => {
 
         expect(container.innerText).toBe(undefined);
     });
+
+    test('It should contain all of original elements, and match the snapshot', () => {
+        let component = renderer.create(<AuthenticationForm />).toJSON();
+
+        expect(component).toMatchSnapshot();
+    });
+    
 });
