@@ -20,7 +20,7 @@ exports[`NavBar The elements of the UI should all render, and be unchanged 1`] =
       </a>
     </h6>
     <div
-      className="MuiBox-root MuiBox-root-1"
+      className="MuiBox-root MuiBox-root-3"
     >
       <div
         className="MuiFormControl-root MuiTextField-root"
