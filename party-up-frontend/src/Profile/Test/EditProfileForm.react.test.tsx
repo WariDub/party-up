@@ -78,6 +78,4 @@ describe('EditProfileForm', () => {
 
         expect(component).toMatchSnapshot();
     });
-
-
 });

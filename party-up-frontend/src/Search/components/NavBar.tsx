@@ -35,7 +35,7 @@ const NavBar = class extends React.PureComponent<NavBarProps, NavBarState> {
           </Typography>
           {showSearchBar ? this.renderSearchBar() : <Box m={1} mx="auto" />}
           <Grid justify="flex-end">
-            <Button onClick={this.didClickButtonProfile}>Profile</Button>
+            <Button onClick={this.didClickButtonProfile} id="ProfileButton">Profile</Button>
           </Grid>
           <Grid justify="flex-end">
             <Button onClick={this.didClickButtonLogout}>Logout</Button>
@@ -91,6 +91,7 @@ const NavBar = class extends React.PureComponent<NavBarProps, NavBarState> {
   };
 
   didClickButtonProfile = (): void => {
+    console.log('Profile button clicked');
     this.props.history.push('/ProfilePage');
   };
 

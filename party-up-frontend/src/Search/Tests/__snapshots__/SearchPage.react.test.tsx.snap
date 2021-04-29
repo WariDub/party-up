@@ -58,6 +58,7 @@ Array [
         <button
           className="MuiButtonBase-root MuiButton-root MuiButton-text"
           disabled={false}
+          id="ProfileButton"
           onBlur={[Function]}
           onClick={[Function]}
           onDragLeave={[Function]}
