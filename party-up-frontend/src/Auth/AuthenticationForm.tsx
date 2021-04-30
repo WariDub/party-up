@@ -39,7 +39,7 @@ export const AuthenticationForm = (props: any) => {
 
   const signIn = async (event: React.FormEvent) => {
     event.preventDefault();
-
+    console.log('SignIn Clicked');
     const response = await auth.onSignIn({
       username: SIusername,
       password: SIpassword,
@@ -52,7 +52,6 @@ export const AuthenticationForm = (props: any) => {
       console.log(response);
       //return <Redirect to= '/'/>
       // return <Redirect to='/' />
-
       props.history.push('/');
     }
   };
