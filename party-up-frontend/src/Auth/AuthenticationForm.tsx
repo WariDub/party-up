@@ -105,13 +105,8 @@ export const AuthenticationForm = (props: any) => {
                   }
                 />
               </div>
-              <div className="group">
-                <input id="check" type="checkbox" className="check" checked />
-                <label htmlFor="check">
-                  <span className="icon"></span> Keep me Signed in
-                </label>
-              </div>
-              <div className="group">
+                       
+		<div className="group">
                 <button type="submit" className="button" value="Sign In" onClick={signIn}>
                   Sign In
                 </button>
@@ -119,7 +114,11 @@ export const AuthenticationForm = (props: any) => {
               </div>
               <div className="hr"></div>
               <div className="foot-lnk">
-                <a href="#forgot">Forgot Password?</a>
+         <a href="#forgot">WELCOME</a><br></br>
+       
+	<a href="#forgot">TO</a><br></br>
+
+	<a href="#forgot">PARTY-UP</a>
               </div>
             </div>
             <div className="sign-up-htm">
@@ -142,6 +141,26 @@ export const AuthenticationForm = (props: any) => {
                   }
                 />
               </div>
+		<div className="group">
+                <label htmlFor="pass" className="label">
+                  Email Address
+                </label>
+                <input
+                  id="pass"
+                  type="text"
+                  className="input"
+                  value={email}
+                  onChange={(event) =>
+                    setSignUpData({
+                      username,
+                      email: event.target.value,
+                      password,
+                      repeatedPassword,
+                    })
+                  }
+                />
+              </div>
+
               <div className="group">
                 <label htmlFor="pass" className="label">
                   Password
@@ -182,26 +201,7 @@ export const AuthenticationForm = (props: any) => {
                   }
                 />
               </div>
-              <div className="group">
-                <label htmlFor="pass" className="label">
-                  Email Address
-                </label>
-                <input
-                  id="pass"
-                  type="text"
-                  className="input"
-                  value={email}
-                  onChange={(event) =>
-                    setSignUpData({
-                      username,
-                      email: event.target.value,
-                      password,
-                      repeatedPassword,
-                    })
-                  }
-                />
-              </div>
-              <div className="group">
+                            <div className="group">
                 <button type="submit" className="button" value="Sign Up" onClick={SignUp}>
                   Register
                 </button>
@@ -209,7 +209,10 @@ export const AuthenticationForm = (props: any) => {
               </div>
               <div className="hr"></div>
               <div className="foot-lnk">
-                <label htmlFor="tab-1">Already Member?</label>
+                <label htmlFor="tab-1">PARTY-UP</label><br></br>
+		 <label htmlFor="tab-1">KSU</label><br></br>
+		<label htmlFor="tab-1">SWE 6813 SPRING 2021</label>
+
               </div>
             </div>
           </div>
