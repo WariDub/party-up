@@ -12,17 +12,16 @@ import {
   TextField,
   Typography,
 } from '@material-ui/core';
-import * as axios from 'axios';
 import * as jwtDecode from 'jwt-decode';
 import React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import { JwtPayload } from '../../Auth/interfaces/jwt-payload.interface';
-import { BACKEND_URL } from '../../globals';
 import { EditUserDto } from '../dtos/edit-user.dto';
 import Gender from '../enums/gender.enum';
 import Genre from '../enums/genre.enum';
 import Role from '../enums/role.enum';
 import User from '../models/user.model';
+import { UsersService } from '../users.service';
 
 export interface EditProfileFormProps extends RouteComponentProps {
   user: User;
@@ -37,6 +36,8 @@ export interface EditProfileFormState {
 }
 
 const EditProfileForm = class extends React.Component<EditProfileFormProps, EditProfileFormState> {
+  usersService = new UsersService();
+
   constructor(props: EditProfileFormProps) {
     super(props);
 
@@ -202,34 +203,26 @@ const EditProfileForm = class extends React.Component<EditProfileFormProps, Edit
 
   handleButtonOnClickSaveChanges = async (): Promise<void> => {
     const { displayName, age, gender, favoriteGenre, favoriteRole } = this.state;
-    if (typeof age !== 'number') {
-      return console.error('age should be a number');
-    }
-
-    const data: EditUserDto = {
+    const editDto: EditUserDto = {
       displayName,
       age,
       gender,
       favoriteGenre,
       favoriteRole,
     };
+
     const accessToken = localStorage.getItem('token');
     if (!accessToken) {
       return console.error('missing access token');
     }
 
-    const payload: JwtPayload = jwtDecode.default(accessToken);
-    const reqUrl = `${BACKEND_URL}/users/${payload.username}`;
-    const config: axios.AxiosRequestConfig = {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    };
+    const { username } = jwtDecode.default(accessToken) as JwtPayload;
 
     try {
-      const user = await axios.default.patch(reqUrl, data, config);
-      console.log(user);
-      this.props.history.push('/');
+      const user = await this.usersService.editUser(username, editDto);
+      if (user) {
+        this.props.history.push('/');
+      }
     } catch (e) {
       console.error(e);
     }

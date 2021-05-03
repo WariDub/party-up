@@ -4,10 +4,9 @@ import NavBar from '../Search/components/NavBar';
 import EditProfileForm from './components/EditProfileForm';
 import FriendList from './components/FriendList';
 import User from './models/user.model';
-import * as axios from 'axios';
 import * as jwtDecode from 'jwt-decode';
-import { BACKEND_URL } from '../globals';
 import { JwtPayload } from '../Auth/interfaces/jwt-payload.interface';
+import { UsersService } from './users.service';
 
 export interface ProfilePageProps extends RouteComponentProps {}
 
@@ -17,6 +16,8 @@ export interface ProfilePageState {
 }
 
 const ProfilePage = class extends React.Component<ProfilePageProps, ProfilePageState> {
+  usersService = new UsersService();
+
   constructor(props: ProfilePageProps) {
     super(props);
 
@@ -50,7 +51,7 @@ const ProfilePage = class extends React.Component<ProfilePageProps, ProfilePageS
         {user ? (
           <EditProfileForm history={history} location={location} match={match} user={user} />
         ) : null}
-        <FriendList friends={friends} />
+        <FriendList user={user} friends={friends} />
       </>
     );
   }
@@ -64,7 +65,7 @@ const ProfilePage = class extends React.Component<ProfilePageProps, ProfilePageS
     const payload: JwtPayload = jwtDecode.default(accessToken);
 
     try {
-      const user = await this.fetchUser(payload.uid);
+      const user = await this.usersService.getUser(payload.uid);
       if (user) {
         this.setState({ user });
       }
@@ -77,7 +78,7 @@ const ProfilePage = class extends React.Component<ProfilePageProps, ProfilePageS
     const operations = [];
 
     for (const friend of user.friends) {
-      operations.push(this.fetchUser(friend));
+      operations.push(this.usersService.getUser(friend));
     }
 
     try {
@@ -93,34 +94,6 @@ const ProfilePage = class extends React.Component<ProfilePageProps, ProfilePageS
       this.setState({ friends });
     } catch (e) {
       console.error(e);
-    }
-  };
-
-  fetchUser = async (id: string): Promise<User | null> => {
-    const accessToken = localStorage.getItem('token');
-    if (!accessToken) {
-      console.error('missing access token');
-      return null;
-    }
-
-    const reqUrl = `${BACKEND_URL}/users?id=${id}`;
-    const config: axios.AxiosRequestConfig = {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    };
-
-    try {
-      const res = await axios.default.get(reqUrl, config);
-      const users = res.data as User[];
-      if (users.length) {
-        return users[0];
-      } else {
-        return null;
-      }
-    } catch (e) {
-      console.error(e);
-      return null;
     }
   };
 };
