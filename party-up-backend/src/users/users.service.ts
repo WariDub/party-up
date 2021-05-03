@@ -146,7 +146,7 @@ export class UsersService {
         user.guardAuthor(username);
 
         const options = { new: true };
-      
+
         try {
             const user = await Users.findOneAndUpdate(
                 { username },
@@ -163,22 +163,22 @@ export class UsersService {
     async unFriendList(
         user: User,
         username: string,
-        editUsersFollowersDto: EditUsersFollowersDto,
- ): Promise<User>{
-            user.guardAuthor(username);
-            const options = { new: true };
-           
-            try {
-                const user = await Users.findOneAndUpdate(
-                { username },
-                { $pull: { friends: editUsersFollowersDto.friends } },
-                options
-                );
-                user.hideSensitiveInfo();
-                return user;
-            } catch (error) {
-                throw new NotFoundException('User not found.');
-            }
+        friendId: string,
+        // editUsersFollowersDto: EditUsersFollowersDto,
+    ): Promise<User> {
+        user.guardAuthor(username);
+        const options = { new: true };
 
+        try {
+            const user = await Users.findOneAndUpdate(
+                { username },
+                { $pull: { friends: friendId } },
+                options,
+            );
+            user.hideSensitiveInfo();
+            return user;
+        } catch (error) {
+            throw new NotFoundException('User not found.');
+        }
     }
 }

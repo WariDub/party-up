@@ -56,12 +56,46 @@ export class UsersService {
   }
 
   async addFriend(username: string, friendId: string): Promise<void> {
-    console.log('adding friend in service');
-    return;
+    const accessToken = localStorage.getItem('token');
+    if (!accessToken) {
+      console.error('missing access token');
+      return;
+    }
+
+    const reqUrl = `${BACKEND_URL}/users/add-friend/${username}`;
+    const config: axios.AxiosRequestConfig = {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    };
+
+    try {
+      const user: User = await axios.default.patch(reqUrl, { friends: friendId }, config);
+    } catch (e) {
+      console.error(e);
+      return;
+    }
   }
 
   async deleteFriend(username: string, friendId: string): Promise<void> {
-    console.log('deleting friend in service');
-    return;
+    const accessToken = localStorage.getItem('token');
+    if (!accessToken) {
+      console.error('missing access token');
+      return;
+    }
+
+    const reqUrl = `${BACKEND_URL}/users/unfriend/${username}/${friendId}`;
+    const config: axios.AxiosRequestConfig = {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    };
+
+    try {
+      const user: User = await axios.default.delete(reqUrl, config);
+    } catch (e) {
+      console.error(e);
+      return;
+    }
   }
 }

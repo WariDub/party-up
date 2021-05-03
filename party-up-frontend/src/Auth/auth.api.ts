@@ -19,86 +19,70 @@ export const onSignUp = async (data: AuthCredentials) => {
 };
 
 export interface SUCredential {
-    username: string, 
-    email: string,
-    password: string
+  username: string;
+  email: string;
+  password: string;
 }
 export interface SICredential {
-
-    username: string, 
-    password: string
+  username: string;
+  password: string;
 }
 
+export class Auth {
+  private static instance: Auth = new Auth();
+  private isAuthenticated: boolean = false;
 
- export class Auth  { 
-
-
-  
-    private static instance:Auth = new Auth();
-    private isAuthenticated:boolean = false;
-
-       constructor(){
-        if(Auth.instance){
-            throw new Error("Error: Instantiation failed: Use SingletonClass.getInstance() instead of new.");
-        }
-        Auth.instance = this;
-       // this.isAuthenticated = localStorage.getItem('token') != null
-       }
-
-       public static getInstance():Auth
-    {
-        return Auth.instance;
+  constructor() {
+    if (Auth.instance) {
+      throw new Error(
+        'Error: Instantiation failed: Use SingletonClass.getInstance() instead of new.'
+      );
     }
+    Auth.instance = this;
+    this.isAuthenticated = localStorage.getItem('token') != null;
+  }
 
-        public getAuthenticated(): boolean{
-            return this.isAuthenticated
-       }
- 
+  public static getInstance(): Auth {
+    return Auth.instance;
+  }
 
-         public onSignIn = async(data: SICredential)=>{
+  public getAuthenticated(): boolean {
+    return this.isAuthenticated;
+  }
 
-        const requestConfig: AxiosRequestConfig = {
-    
-            method: 'POST',
-            url: 'http://localhost:3001/auth/login',
-            data
-        }
-    try {
-    
-        const {data: response} = await Axios.request(requestConfig)
-        this.isAuthenticated = true
-        localStorage.setItem('token', response.accessToken);
-        return response
-       
-    
-    }
-    catch(e){
-    
-    console.log()
-    
-    return {error: e.response.data.message}
-    
-    }
-    
-    }
-
-    
-
- onSignUp = async (data: SUCredential)=>{
-
-
+  public onSignIn = async (data: SICredential) => {
     const requestConfig: AxiosRequestConfig = {
-        method: 'POST',
-        url: 'http://localhost:3001/auth/register', 
-        data
+      method: 'POST',
+      url: 'http://localhost:3001/auth/login',
+      data,
+    };
+    try {
+      const { data: response } = await Axios.request(requestConfig);
+      this.isAuthenticated = true;
+      localStorage.setItem('token', response.accessToken);
+      return response;
+    } catch (e) {
+      console.log();
+
+      return { error: e.response.data.message };
     }
+  };
 
+  onSignUp = async (data: SUCredential) => {
+    const requestConfig: AxiosRequestConfig = {
+      method: 'POST',
+      url: 'http://localhost:3001/auth/register',
+      data,
+    };
 
-    try{
-        const {data: response } = await Axios.request(requestConfig);
-        this.isAuthenticated = true
-        localStorage.setItem('token', response.accessToken);
-        return response
+    try {
+      const { data: response } = await Axios.request(requestConfig);
+      this.isAuthenticated = true;
+      localStorage.setItem('token', response.accessToken);
+      return response;
+    } catch (e) {
+      console.log(e);
+      return { error: e.response.data.message };
     }
   };
 
@@ -107,16 +91,3 @@ export interface SICredential {
     this.isAuthenticated = false;
   };
 }
-
-
-
-
-
-
-
-}
-
-
-
-
-

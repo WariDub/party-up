@@ -47,15 +47,16 @@ export class UsersController {
         @Param('username') username: string,
         @Body(ValidationPipe) editUsersFollowersDto: EditUsersFollowersDto,
     ): Promise<User> {
-        return this.usersService.addFriendList( user, username, editUsersFollowersDto);
+        return this.usersService.addFriendList(user, username, editUsersFollowersDto);
     }
 
-    @Delete('unfriend/:username')
+    @Delete('unfriend/:username/:friendId')
     async UnFriendList(
         @GetUser() user: User,
         @Param('username') username: string,
-        @Body(ValidationPipe) editUsersFollowersDto: EditUsersFollowersDto,
+        @Param('friendId') friendId: string,
+        // @Body(ValidationPipe) editUsersFollowersDto: EditUsersFollowersDto,
     ): Promise<User> {
-        return this.usersService.unFriendList( user, username, editUsersFollowersDto);
+        return this.usersService.unFriendList(user, username, friendId);
     }
 }
