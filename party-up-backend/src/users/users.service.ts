@@ -7,6 +7,7 @@ import {
 } from '@nestjs/common';
 import { AuthCredentialsDto } from '../auth/dtos/auth-credentials.dto';
 import { EditUserDto } from './dtos/edit-user.dto';
+import { EditUsersFollowersDto } from './dtos/edit-user-followers.dto';
 import { User, Users } from './models/user.model';
 import * as bcrypt from 'bcryptjs';
 import { GetUsersFilterDto } from './dtos/get-users-filter.dto';
@@ -135,5 +136,49 @@ export class UsersService {
         } catch (error) {
             throw new NotFoundException('User not found.');
         }
+    }
+
+    async addFriendList(
+        user: User,
+        username: string,
+        editUsersFollowersDto: EditUsersFollowersDto,
+    ): Promise<User> {
+        user.guardAuthor(username);
+
+        const options = { new: true };
+      
+        try {
+            const user = await Users.findOneAndUpdate(
+                { username },
+                { $push: { friends: editUsersFollowersDto.friends } },
+                options,
+            );
+            user.hideSensitiveInfo();
+            return user;
+        } catch (error) {
+            throw new NotFoundException('User not found.');
+        }
+    }
+
+    async unFriendList(
+        user: User,
+        username: string,
+        editUsersFollowersDto: EditUsersFollowersDto,
+ ): Promise<User>{
+            user.guardAuthor(username);
+            const options = { new: true };
+           
+            try {
+                const user = await Users.findOneAndUpdate(
+                { username },
+                { $pull: { friends: editUsersFollowersDto.friends } },
+                options
+                );
+                user.hideSensitiveInfo();
+                return user;
+            } catch (error) {
+                throw new NotFoundException('User not found.');
+            }
+
     }
 }
