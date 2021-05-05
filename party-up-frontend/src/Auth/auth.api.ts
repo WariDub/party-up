@@ -13,8 +13,12 @@ export const onSignUp = async (data: AuthCredentials) => {
     const { data } = await Axios.request(requestConfig);
     console.log(data.accessToken);
   } catch (e) {
-    console.error(e.response);
-    return { error: e.response.data.message };
+    console.error(e);
+    if (e.response && e.response.data) {
+      return e.response.data.message;
+    } else {
+      return e;
+    }
   }
 };
 
@@ -62,9 +66,12 @@ export class Auth {
       localStorage.setItem('token', response.accessToken);
       return response;
     } catch (e) {
-      console.log();
-
-      return { error: e.response.data.message };
+      console.log(e);
+      if (e.response && e.response.data) {
+        return e.response.data.message;
+      } else {
+        return e;
+      }
     }
   };
 
@@ -82,7 +89,11 @@ export class Auth {
       return response;
     } catch (e) {
       console.log(e);
-      return { error: e.response.data.message };
+      if (e.response && e.response.data) {
+        return e.response.data.message;
+      } else {
+        return e;
+      }
     }
   };
 
