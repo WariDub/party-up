@@ -160,12 +160,7 @@ export class UsersService {
         }
     }
 
-    async unFriendList(
-        user: User,
-        username: string,
-        friendId: string,
-        // editUsersFollowersDto: EditUsersFollowersDto,
-    ): Promise<User> {
+    async unFriendList(user: User, username: string, friendId: string): Promise<User> {
         user.guardAuthor(username);
         const options = { new: true };
 

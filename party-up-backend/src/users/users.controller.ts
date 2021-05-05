@@ -55,7 +55,6 @@ export class UsersController {
         @GetUser() user: User,
         @Param('username') username: string,
         @Param('friendId') friendId: string,
-        // @Body(ValidationPipe) editUsersFollowersDto: EditUsersFollowersDto,
     ): Promise<User> {
         return this.usersService.unFriendList(user, username, friendId);
     }

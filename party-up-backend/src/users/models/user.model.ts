@@ -83,8 +83,9 @@ export class User {
 
     @prop({
         required: false,
+        type: String,
     })
-    friends: [string];
+    friends: string[];
 
     async verifyPassword(password: string): Promise<boolean> {
         const hash = await bcrypt.hash(password, this.salt);
