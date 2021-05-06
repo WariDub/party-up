@@ -57,7 +57,7 @@ export class Auth {
   public onSignIn = async (data: SICredential) => {
     const requestConfig: AxiosRequestConfig = {
       method: 'POST',
-      url: 'http://localhost:3001/auth/login',
+      url: `${BACKEND_URL}/auth/login`,
       data,
     };
     try {
@@ -78,7 +78,7 @@ export class Auth {
   onSignUp = async (data: SUCredential) => {
     const requestConfig: AxiosRequestConfig = {
       method: 'POST',
-      url: 'http://localhost:3001/auth/register',
+      url: `${BACKEND_URL}/auth/register`,
       data,
     };
 
